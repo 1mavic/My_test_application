@@ -3,7 +3,9 @@ import "dart:developer";
 
 import "package:dio/dio.dart";
 import "package:flutter_test_application/config/environment.dart";
+import 'package:flutter_test_application/domain/entity/album/album_model.dart';
 import 'package:flutter_test_application/domain/entity/comment/comment_model.dart';
+import 'package:flutter_test_application/domain/entity/photo/photo_model.dart';
 import 'package:flutter_test_application/domain/entity/post/post_model.dart';
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
 
@@ -53,18 +55,55 @@ class ApiClient {
     }
   }
 
-  Future<void> sendComment(Comment newComment) async {
+  Future<List<Album>?> fetchUserAlbums(int userId) async {
     try {
-      final Response response = await _dio
-          .post("$_baseUrl/comments", queryParameters: <String, dynamic>{
-        "postId": newComment.postId,
-        "name": newComment.name,
-        "email": newComment.email,
-        "body": newComment.body
-      });
+      final Response response =
+          await _dio.get("$_baseUrl/albums?userId=$userId");
+      final List<Album>? albums = (response.data as List)
+          .map((dynamic album) => Album.fromJson(album as Map<String, dynamic>))
+          .toList();
+      return albums;
     } catch (e) {
       log(e.toString());
-      return;
+      return null;
+    }
+  }
+
+  Future<List<Photo>?> fetchAlbumPhotos(int albumId) async {
+    try {
+      final Response response =
+          await _dio.get("$_baseUrl/photos?albumId=$albumId");
+      final List<Photo>? photos = (response.data as List)
+          .map((dynamic photos) =>
+              Photo.fromJson(photos as Map<String, dynamic>))
+          .toList();
+      return photos;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
+
+  Future<int?> sendComment(Comment newComment) async {
+    try {
+      final Response response = await _dio.post(
+        "$_baseUrl/comments",
+        queryParameters: <String, dynamic>{
+          "postId": newComment.postId,
+          "name": newComment.name,
+          "email": newComment.email,
+          "body": newComment.body
+        },
+      );
+      if (response.statusCode == 201) {
+        final _data = response.data as Map<String, dynamic>;
+        final int _id = _data["id"] as int;
+        return _id;
+      }
+      return null;
+    } catch (e) {
+      log(e.toString());
+      return null;
     }
   }
 }

@@ -37,11 +37,27 @@ class CommentBlock extends Bloc<CommentEvent, CommentScreenState> {
     });
     on<SendCommentEvent>(
         (SendCommentEvent event, Emitter<CommentScreenState> emit) async {
-      emit(CommentLoadingState());
-      // final List<Comment> _commentList =
-      //     await _commentService.getPostbyId(event.id);
-      // _comments = _commentList;
-      // emit(CommentListObtainedState());
+      // emit(CommentLoadingState());
+      final int? id = await _commentService.sendComment(
+        _comments.first.postId,
+        event.name,
+        event.email,
+        event.comment,
+      );
+      if (id != null) {
+        emit(CommentLoadingState());
+        _comments.insert(
+          0,
+          Comment(
+            id: id,
+            postId: _comments.first.postId,
+            email: event.email,
+            name: event.name,
+            body: event.comment,
+          ),
+        );
+        emit(CommentListObtainedState());
+      }
       return;
     });
   }

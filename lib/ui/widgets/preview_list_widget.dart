@@ -1,22 +1,29 @@
 import "package:flutter/material.dart";
+import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
-import "package:flutter_test_application/navigation/routes.dart";
 import "package:flutter_test_application/styles/app_colors.dart";
 import "package:flutter_test_application/ui/widgets/card_widget.dart";
 
-class PostsWidget extends StatelessWidget {
-  const PostsWidget({Key? key, required this.posts, required this.small})
-      : super(key: key);
-  final List<Post> posts;
+class PreviewWidget<T> extends StatelessWidget {
+  const PreviewWidget({
+    Key? key,
+    required this.items,
+    required this.small,
+    required this.routeToDetail,
+    required this.routeToList,
+  }) : super(key: key);
+  final List<T> items;
+  final String routeToDetail;
+  final String routeToList;
   final bool small;
   @override
   Widget build(BuildContext context) {
     final int _length = small
-        ? posts.length > 3
+        ? items.length > 3
             ? 3
-            : posts.length
-        : posts.length;
-    if (posts.isEmpty) {
+            : items.length
+        : items.length;
+    if (items.isEmpty) {
       return const SizedBox.shrink();
     }
     final Widget _bodyList = CardWidget(
@@ -38,25 +45,25 @@ class PostsWidget extends StatelessWidget {
                   return;
                 }
                 Navigator.of(context)
-                    .pushNamed(AppRoutes.userPostInfo, arguments: posts[index]);
+                    .pushNamed(routeToDetail, arguments: items[index]);
               },
-              child: _PostPreviewWidget(
-                post: posts[index],
+              child: _ItemPreviewWidget<T>(
+                item: items[index],
               ),
             ),
           ),
           if (small) const SizedBox(height: 10),
-          if (small && posts.length > 3)
+          if (small && items.length > 3)
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(
-                    AppRoutes.userPostsAll,
-                    arguments: posts,
+                    routeToList,
+                    arguments: items,
                   );
                 },
-                child: const Text("Просмотреть все посты"),
+                child: const Text("Просмотреть все"),
               ),
             )
         ],
@@ -72,21 +79,33 @@ class PostsWidget extends StatelessWidget {
   }
 }
 
-class _PostPreviewWidget extends StatelessWidget {
-  const _PostPreviewWidget({Key? key, required this.post}) : super(key: key);
-  final Post post;
+class _ItemPreviewWidget<T> extends StatelessWidget {
+  const _ItemPreviewWidget({Key? key, required this.item}) : super(key: key);
+  final T item;
   @override
   Widget build(BuildContext context) {
+    String? _title;
+    String? _body;
+    if (T == Post) {
+      final post = item as Post;
+      _title = post.title;
+      _body = post.body.split("\n").first;
+    } else if (T == Album) {
+      final album = item as Album;
+      _title = album.title;
+      _body = null;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(post.title),
-        const SizedBox(height: 5),
-        Text(
-          post.body.split("\n").first,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
+        if (_title != null) Text(_title),
+        if (_title != null && _body != null) const SizedBox(height: 5),
+        if (_body != null)
+          Text(
+            _body,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
       ],
     );
   }

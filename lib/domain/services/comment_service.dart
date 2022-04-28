@@ -9,20 +9,21 @@ class CommentService {
     return comments ?? <Comment>[];
   }
 
-  Future<void> sendComment(
+  Future<int?> sendComment(
     int postId,
     String name,
     String email,
     String comment,
   ) async {
-    _apiClient.sendComment(
+    final int? id = await _apiClient.sendComment(
       Comment(
-        id: id,
+        id: 0,
         postId: postId,
         email: email,
         name: name,
         body: comment,
       ),
     );
+    return id;
   }
 }

@@ -1,5 +1,15 @@
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_test_application/domain/block/album_block/album_block.dart";
+import "package:flutter_test_application/domain/block/album_block/album_state.dart";
+import "package:flutter_test_application/domain/block/post_block/post_block.dart";
+import "package:flutter_test_application/domain/block/post_block/posts_state.dart";
+import "package:flutter_test_application/domain/entity/album/album_model.dart";
+import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
+import "package:flutter_test_application/navigation/routes.dart";
+import 'package:flutter_test_application/ui/widgets/preview_list_widget.dart';
+import "package:flutter_test_application/ui/widgets/card_widget.dart";
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
 import "package:flutter_test_application/ui/widgets/user_card_widget.dart";
 
@@ -10,10 +20,137 @@ class UserInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldBodyTemplateWidget(
       appBarTitle: user.userName,
-      body: UserCardWidget(
-        user: user,
-        small: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            UserCardWidget(
+              user: user,
+              small: false,
+            ),
+            const _PostList(),
+            const SizedBox(
+              height: 10,
+            ),
+            _AlbumList()
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _PostList extends StatelessWidget {
+  const _PostList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PostBlock, PostScreenState>(
+      builder: (BuildContext context, PostScreenState state) {
+        switch (state.runtimeType) {
+          case PostLoadingState:
+            final PostLoadingState _state = state as PostLoadingState;
+            return CardWidget(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      _state.message,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const CircularProgressIndicator.adaptive()
+                  ],
+                ),
+              ),
+            );
+          case PostErrorState:
+            final PostErrorState _state = state as PostErrorState;
+            return CardWidget(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      _state.error,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          case PostListObtainedState:
+            final List<Post> _posts = context.watch<PostBlock>().posts;
+            return PreviewWidget<Post>(
+              items: _posts,
+              routeToList: AppRoutes.userPostsAll,
+              routeToDetail: AppRoutes.userPostInfo,
+              small: true,
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
+    );
+  }
+}
+
+class _AlbumList extends StatelessWidget {
+  const _AlbumList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AlbumBlock, AlbumScreenState>(
+      builder: (BuildContext context, AlbumScreenState state) {
+        switch (state.runtimeType) {
+          case AlbumLoadingState:
+            final AlbumLoadingState _state = state as AlbumLoadingState;
+            return CardWidget(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      _state.message,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const CircularProgressIndicator.adaptive()
+                  ],
+                ),
+              ),
+            );
+          case AlbumErrorState:
+            final AlbumErrorState _state = state as AlbumErrorState;
+            return CardWidget(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      _state.error,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          case AlbumListObtainedState:
+            final List<Album> _albums = context.watch<AlbumBlock>().albums;
+            return PreviewWidget<Album>(
+              items: _albums,
+              routeToList: AppRoutes.userAlbums,
+              routeToDetail: AppRoutes.userAlbumInfo,
+              small: true,
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

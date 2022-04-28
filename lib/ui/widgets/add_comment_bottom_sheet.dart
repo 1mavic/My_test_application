@@ -66,6 +66,7 @@ class AddCommentWidget extends HookWidget {
                     _commentContorller.text,
                   ),
                 );
+                Navigator.pop(context);
               }
             },
             child: Container(
