@@ -29,7 +29,7 @@ class UsersScreen extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    //const CircularProgressIndicator.adaptive()
+                    const CircularProgressIndicator.adaptive()
                   ],
                 ),
               );
@@ -69,7 +69,7 @@ class _UserListWidget extends StatelessWidget {
         context.read<UserBlock>().add(GetUsersEvent());
       },
       child: ListView.separated(
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (BuildContext context, int index) => UserCardWidget(
           user: _users[index],
           small: true,

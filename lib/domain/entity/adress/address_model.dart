@@ -1,5 +1,8 @@
-import "package:flutter_test_application/domain/entity/geo/geo_model.dart";
+import "dart:convert";
+
 import "package:json_annotation/json_annotation.dart";
+
+import "package:flutter_test_application/domain/entity/geo/geo_model.dart";
 
 part "address_model.g.dart";
 
@@ -28,4 +31,46 @@ class Address {
       _$AddressFromJson(json);
 
   Map<String, dynamic> toJson() => _$AddressToJson(this);
+
+  Address copyWith({
+    String? street,
+    String? suite,
+    String? city,
+    String? zipcode,
+    Geo? geo,
+  }) {
+    return Address(
+      street: street ?? this.street,
+      suite: suite ?? this.suite,
+      city: city ?? this.city,
+      zipcode: zipcode ?? this.zipcode,
+      geo: geo ?? this.geo,
+    );
+  }
+
+  @override
+  String toString() {
+    return "Address(street: $street, suite: $suite, city: $city, zipcode: $zipcode, geo: $geo)";
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Address &&
+        other.street == street &&
+        other.suite == suite &&
+        other.city == city &&
+        other.zipcode == zipcode &&
+        other.geo == geo;
+  }
+
+  @override
+  int get hashCode {
+    return street.hashCode ^
+        suite.hashCode ^
+        city.hashCode ^
+        zipcode.hashCode ^
+        geo.hashCode;
+  }
 }

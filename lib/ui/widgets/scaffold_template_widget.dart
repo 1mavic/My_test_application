@@ -14,7 +14,7 @@ class ScaffoldBodyTemplateWidget extends StatelessWidget {
         title: Text(appBarTitle),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: body,
       ),
     );
