@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'geo_model.dart';
+part of "geo_model.dart";
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -9,15 +9,15 @@ part of 'geo_model.dart';
 Geo _$GeoFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['lat', 'lng'],
+    requiredKeys: const ["lat", "lng"],
   );
   return Geo(
-    lat: json['lat'] as String,
-    lng: json['lng'] as String,
+    lat: json["lat"] as String,
+    lng: json["lng"] as String,
   );
 }
 
 Map<String, dynamic> _$GeoToJson(Geo instance) => <String, dynamic>{
-      'lat': instance.lat,
-      'lng': instance.lng,
+      "lat": instance.lat,
+      "lng": instance.lng,
     };

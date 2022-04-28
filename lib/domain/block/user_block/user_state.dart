@@ -1,7 +1,3 @@
-import "package:flutter/foundation.dart";
-
-import "package:flutter_test_application/domain/entity/user/user_model.dart";
-
 abstract class UserScreenState {}
 
 class UserLoadingState extends UserScreenState {

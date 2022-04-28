@@ -1,16 +1,13 @@
-import 'package:carousel_slider/carousel_controller.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/material.dart";
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_application/domain/block/album_block/album_block.dart';
-import 'package:flutter_test_application/domain/block/album_block/album_state.dart';
-import 'package:flutter_test_application/domain/block/photo_block/photo_block.dart';
-import 'package:flutter_test_application/domain/block/photo_block/photo_state.dart';
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_test_application/domain/block/photo_block/photo_block.dart";
+import "package:flutter_test_application/domain/block/photo_block/photo_state.dart";
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
-import 'package:flutter_test_application/domain/entity/photo/photo_model.dart';
-import 'package:flutter_test_application/styles/app_colors.dart';
-import 'package:flutter_test_application/ui/widgets/card_widget.dart';
-import 'package:flutter_test_application/ui/widgets/image_widget.dart';
+import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
+import "package:flutter_test_application/styles/app_colors.dart";
+import "package:flutter_test_application/ui/widgets/card_widget.dart";
+import "package:flutter_test_application/ui/widgets/image_widget.dart";
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
 
 class AlbumInfoScreen extends StatelessWidget {
@@ -42,7 +39,6 @@ class _AlbumdPhotosWidget extends StatelessWidget {
       builder: (BuildContext context, PhotoScreenState state) {
         switch (state.runtimeType) {
           case PhotoLoadingState:
-            final PhotoLoadingState _state = state as PhotoLoadingState;
             return const SizedBox.square(
               dimension: 200,
               child: CircularProgressIndicator.adaptive(),
@@ -70,7 +66,6 @@ class _AlbumdPhotosWidget extends StatelessWidget {
             final List<Widget> _photosForSlider = _photos
                 .map(
                   (Photo photo) => Stack(
-                    clipBehavior: Clip.hardEdge,
                     children: <Widget>[
                       ImageWidget(
                         url: photo.url,

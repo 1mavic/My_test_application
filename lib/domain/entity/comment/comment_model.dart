@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import "package:json_annotation/json_annotation.dart";
 
 part "comment_model.g.dart";
@@ -48,7 +46,7 @@ class Comment {
 
   @override
   String toString() {
-    return 'Comment(id: $id, postId: $postId, email: $email, name: $name, body: $body)';
+    return "Comment(id: $id, postId: $postId, email: $email, name: $name, body: $body)";
   }
 
   @override

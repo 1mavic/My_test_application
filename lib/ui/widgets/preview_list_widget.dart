@@ -87,11 +87,11 @@ class _ItemPreviewWidget<T> extends StatelessWidget {
     String? _title;
     String? _body;
     if (T == Post) {
-      final post = item as Post;
+      final Post post = item as Post;
       _title = post.title;
       _body = post.body.split("\n").first;
     } else if (T == Album) {
-      final album = item as Album;
+      final Album album = item as Album;
       _title = album.title;
       _body = null;
     }

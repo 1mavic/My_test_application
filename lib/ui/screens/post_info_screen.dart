@@ -15,7 +15,7 @@ class PostInfoScrenn extends StatelessWidget {
   final Post post;
   @override
   Widget build(BuildContext context) {
-    final _model = context.watch<CommentBlock>();
+    final CommentBlock _model = context.watch<CommentBlock>();
     return ScaffoldBodyTemplateWidget(
       appBarTitle: "Пост",
       body: Column(

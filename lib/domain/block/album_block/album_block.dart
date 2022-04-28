@@ -1,10 +1,7 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/block/album_block/album_state.dart';
-import "package:flutter_test_application/domain/block/post_block/posts_state.dart";
-import 'package:flutter_test_application/domain/entity/album/album_model.dart';
-import "package:flutter_test_application/domain/entity/post/post_model.dart";
-import 'package:flutter_test_application/domain/services/album_service.dart';
-import "package:flutter_test_application/domain/services/post_sevices.dart";
+import "package:flutter_test_application/domain/block/album_block/album_state.dart";
+import "package:flutter_test_application/domain/entity/album/album_model.dart";
+import "package:flutter_test_application/domain/services/album_service.dart";
 
 abstract class AlbumEvent {}
 

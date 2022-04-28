@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 import "package:flutter_test_application/domain/block/comment_block/comment_block.dart";
 import "package:flutter_test_application/styles/app_colors.dart";
@@ -14,9 +13,9 @@ class AddCommentWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final _nameContorller = useTextEditingController();
-    final _emailContorller = useTextEditingController();
-    final _commentContorller = useTextEditingController();
+    final TextEditingController _nameContorller = useTextEditingController();
+    final TextEditingController _emailContorller = useTextEditingController();
+    final TextEditingController _commentContorller = useTextEditingController();
     return Form(
       key: _formKey,
       child: Column(

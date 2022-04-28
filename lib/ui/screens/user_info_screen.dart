@@ -8,8 +8,8 @@ import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
 import "package:flutter_test_application/navigation/routes.dart";
-import 'package:flutter_test_application/ui/widgets/preview_list_widget.dart';
 import "package:flutter_test_application/ui/widgets/card_widget.dart";
+import "package:flutter_test_application/ui/widgets/preview_list_widget.dart";
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
 import "package:flutter_test_application/ui/widgets/user_card_widget.dart";
 
@@ -31,7 +31,7 @@ class UserInfoScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            _AlbumList()
+            const _AlbumList()
           ],
         ),
       ),

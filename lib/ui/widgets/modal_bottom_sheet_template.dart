@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:flutter_test_application/styles/app_colors.dart';
+import "package:flutter_test_application/styles/app_colors.dart";
 import "package:modal_bottom_sheet/modal_bottom_sheet.dart";
 
 Future<T?> showMyCustomModalBottomSheet<T>({
@@ -52,7 +52,8 @@ Future<T?> showMyCustomModalBottomSheet<T>({
                     child: Center(
                       child: Container(
                         decoration: const BoxDecoration(
-                            color: AppColors.containerColor),
+                          color: AppColors.containerColor,
+                        ),
                         width: 140,
                       ),
                     ),

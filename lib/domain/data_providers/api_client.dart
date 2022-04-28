@@ -1,12 +1,11 @@
-import "dart:convert";
 import "dart:developer";
 
 import "package:dio/dio.dart";
 import "package:flutter_test_application/config/environment.dart";
-import 'package:flutter_test_application/domain/entity/album/album_model.dart';
-import 'package:flutter_test_application/domain/entity/comment/comment_model.dart';
-import 'package:flutter_test_application/domain/entity/photo/photo_model.dart';
-import 'package:flutter_test_application/domain/entity/post/post_model.dart';
+import "package:flutter_test_application/domain/entity/album/album_model.dart";
+import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
+import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
+import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
 
 class ApiClient {
@@ -74,8 +73,9 @@ class ApiClient {
       final Response response =
           await _dio.get("$_baseUrl/photos?albumId=$albumId");
       final List<Photo>? photos = (response.data as List)
-          .map((dynamic photos) =>
-              Photo.fromJson(photos as Map<String, dynamic>))
+          .map(
+            (dynamic photos) => Photo.fromJson(photos as Map<String, dynamic>),
+          )
           .toList();
       return photos;
     } catch (e) {

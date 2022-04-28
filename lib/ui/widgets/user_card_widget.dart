@@ -14,7 +14,7 @@ class UserCardWidget extends StatelessWidget {
       children: <Widget>[
         CardWidget(
           child: small
-              ? GestureDetector(
+              ? InkWell(
                   onTap: () {
                     if (!small) {
                       return;
