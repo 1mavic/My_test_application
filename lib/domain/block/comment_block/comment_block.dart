@@ -11,6 +11,14 @@ class GetCommentsEvent extends CommentEvent {
   GetCommentsEvent(this.id);
 }
 
+class SendCommentEvent extends CommentEvent {
+  final String name;
+  final String email;
+  final String comment;
+
+  SendCommentEvent(this.name, this.email, this.comment);
+}
+
 class CommentBlock extends Bloc<CommentEvent, CommentScreenState> {
   List<Comment> _comments = <Comment>[];
 
@@ -25,6 +33,15 @@ class CommentBlock extends Bloc<CommentEvent, CommentScreenState> {
           await _commentService.getPostbyId(event.id);
       _comments = _commentList;
       emit(CommentListObtainedState());
+      return;
+    });
+    on<SendCommentEvent>(
+        (SendCommentEvent event, Emitter<CommentScreenState> emit) async {
+      emit(CommentLoadingState());
+      // final List<Comment> _commentList =
+      //     await _commentService.getPostbyId(event.id);
+      // _comments = _commentList;
+      // emit(CommentListObtainedState());
       return;
     });
   }

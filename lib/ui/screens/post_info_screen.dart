@@ -15,6 +15,7 @@ class PostInfoScrenn extends StatelessWidget {
   final Post post;
   @override
   Widget build(BuildContext context) {
+    final _model = context.watch<CommentBlock>();
     return ScaffoldBodyTemplateWidget(
       appBarTitle: "Пост",
       body: Column(
@@ -36,7 +37,8 @@ class PostInfoScrenn extends StatelessWidget {
                 showMyCustomModalBottomSheet(
                   fullHeight: false,
                   context: context,
-                  builder: (BuildContext context) => const AddCommentWidget(),
+                  builder: (BuildContext context) =>
+                      AddCommentWidget(commentBlock: _model),
                 );
               },
               child: const Text("Добавить комментарий"),
@@ -62,7 +64,7 @@ class _DetailedPostWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
-              "Заголов",
+              "Заголовок",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             Text(

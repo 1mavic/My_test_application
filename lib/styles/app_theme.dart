@@ -1,5 +1,4 @@
-// ignore: prefer_double_quotes
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 import "package:flutter_test_application/styles/app_colors.dart";
 
 final ThemeData appTheme = ThemeData(
@@ -13,10 +12,10 @@ final ThemeData appTheme = ThemeData(
     isDense: true,
     isCollapsed: true,
     hintStyle: const TextStyle(
-      color: AppColors.containerColor,
+      color: AppColors.blue,
     ),
     labelStyle: const TextStyle(color: AppColors.containerColor),
-    fillColor: AppColors.blue,
+    fillColor: AppColors.containerColor,
     focusColor: AppColors.white,
     contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
     errorBorder: OutlineInputBorder(
@@ -31,7 +30,7 @@ final ThemeData appTheme = ThemeData(
       borderSide: const BorderSide(color: AppColors.containerColor),
       borderRadius: BorderRadius.circular(8),
     ),
-    errorStyle: const TextStyle(color: AppColors.containerColor),
+    errorStyle: const TextStyle(color: AppColors.red),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
     ),

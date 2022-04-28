@@ -52,4 +52,19 @@ class ApiClient {
       return null;
     }
   }
+
+  Future<void> sendComment(Comment newComment) async {
+    try {
+      final Response response = await _dio
+          .post("$_baseUrl/comments", queryParameters: <String, dynamic>{
+        "postId": newComment.postId,
+        "name": newComment.name,
+        "email": newComment.email,
+        "body": newComment.body
+      });
+    } catch (e) {
+      log(e.toString());
+      return;
+    }
+  }
 }
