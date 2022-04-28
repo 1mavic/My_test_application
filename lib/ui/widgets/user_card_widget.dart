@@ -1,0 +1,94 @@
+import "package:flutter/material.dart";
+import "package:flutter_test_application/domain/entity/user/user_model.dart";
+import "package:flutter_test_application/navigation/routes.dart";
+import "package:flutter_test_application/ui/widgets/card_widget.dart";
+
+class UserCardWidget extends StatelessWidget {
+  const UserCardWidget({Key? key, required this.user, required this.small})
+      : super(key: key);
+  final User user;
+  final bool small;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        if (!small) {
+          return;
+        }
+        Navigator.of(context).pushNamed(AppRoutes.userInfo, arguments: user);
+      },
+      child: CardWidget(
+        child: small
+            ? _SmallWidget(user: user)
+            : _BigWidget(
+                user: user,
+              ),
+      ),
+    );
+  }
+}
+
+class _SmallWidget extends StatelessWidget {
+  const _SmallWidget({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("User name: ${user.userName}"),
+        Text("Name: ${user.name}"),
+      ],
+    );
+  }
+}
+
+class _BigWidget extends StatelessWidget {
+  const _BigWidget({Key? key, required this.user}) : super(key: key);
+  final User user;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text("Name: ${user.name}"),
+        Text("email: ${user.email}"),
+        Text("Name: ${user.phone}"),
+        Text("email: ${user.website}"),
+        const SizedBox(
+          height: 15,
+        ),
+        Text(
+          "Working company:",
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        Text("name: ${user.company.name}"),
+        Text("bs: ${user.company.bs}"),
+        RichText(
+          text: TextSpan(
+            children: <InlineSpan>[
+              TextSpan(
+                text: "catch phrase: ",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              TextSpan(
+                text: user.company.catchPhrase,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontStyle: FontStyle.italic),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

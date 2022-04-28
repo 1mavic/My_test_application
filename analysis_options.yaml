@@ -1,0 +1,45 @@
+# This file configures the analyzer to use the lint rule set from `package:lint`
+
+# For apps, use the default set
+include: package:lint/analysis_options.yaml
+
+# Packages, that may be distributed (i.e. via pub.dev) should use the package 
+# version, resulting in a better pub score.
+# include: package:lint/analysis_options_package.yaml
+
+# You might want to exclude auto-generated files from dart analysis
+analyzer:
+  exclude:
+    #- '**.freezed.dart'
+
+# You can customize the lint rules set to your own liking. A list of all rules
+# can be found at https://dart-lang.github.io/linter/lints/options/options.html
+linter:
+  rules:
+    - unnecessary_null_checks
+    - unnecessary_constructor_name
+    - unnecessary_getters_setters
+    - unnecessary_lambdas
+    - throw_in_finally
+    - sized_box_for_whitespace
+    - sized_box_shrink_expand
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - prefer_double_quotes
+    - prefer_const_constructors
+    - flutter_style_todos
+    - empty_catches
+    - empty_constructor_bodies
+    - camel_case_extensions
+    - camel_case_types
+    - avoid_print
+    - always_specify_types
+    # Util classes are awesome!
+    # avoid_classes_with_only_static_members: false
+    
+    # Make constructors the first thing in every class
+    # sort_constructors_first: true
+
+    # Choose wisely, but you don't have to
+    # prefer_double_quotes: true
+    # prefer_single_quotes: true

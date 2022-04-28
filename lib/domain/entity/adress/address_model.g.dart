@@ -1,0 +1,29 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'address_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Address _$AddressFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['street', 'suite', 'city', 'zipcode', 'geo'],
+  );
+  return Address(
+    street: json['street'] as String,
+    suite: json['suite'] as String,
+    city: json['city'] as String,
+    zipcode: json['zipcode'] as String,
+    geo: Geo.fromJson(json['geo'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
+      'street': instance.street,
+      'suite': instance.suite,
+      'city': instance.city,
+      'zipcode': instance.zipcode,
+      'geo': instance.geo.toJson(),
+    };
