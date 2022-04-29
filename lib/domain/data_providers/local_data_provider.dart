@@ -1,7 +1,13 @@
 import "package:hive_flutter/hive_flutter.dart";
 
 class LocalDataProvider {
-  // final Box<String> _userBox = Hive.box("users");
+  void clearAll() {
+    Hive.box<String>("users").clear();
+    Hive.box<String>("posts").clear();
+    Hive.box<String>("albums").clear();
+    Hive.box<String>("comments").clear();
+  }
+
   String? checkUser() {
     final String? users = Hive.box<String>("users").get("data");
     return users;

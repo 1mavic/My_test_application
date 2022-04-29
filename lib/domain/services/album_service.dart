@@ -11,7 +11,7 @@ class AlbumService {
   List<Album> makeAlbums(String newAlbums) {
     try {
       final dynamic _albums = jsonDecode(newAlbums);
-      final List<Album> albums = (_albums as List)
+      final List<Album> albums = (_albums as List<dynamic>)
           .map((dynamic album) => Album.fromJson(album as Map<String, dynamic>))
           .toList();
       return albums;

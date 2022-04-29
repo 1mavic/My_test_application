@@ -11,7 +11,7 @@ class UserService {
   List<User> makeUsers(String newUsers) {
     try {
       final dynamic _users = jsonDecode(newUsers);
-      final List<User> users = (_users as List)
+      final List<User> users = (_users as List<dynamic>)
           .map((dynamic user) => User.fromJson(user as Map<String, dynamic>))
           .toList();
       return users;
@@ -20,11 +20,14 @@ class UserService {
     }
   }
 
-  Future<List<User>> getUsers() async {
-    final String? localUsers = _localDataProvider.checkUser();
-
-    if (localUsers != null) {
-      return makeUsers(localUsers);
+  Future<List<User>> getUsers([bool clearCache = false]) async {
+    if (!clearCache) {
+      final String? localUsers = _localDataProvider.checkUser();
+      if (localUsers != null) {
+        return makeUsers(localUsers);
+      }
+    } else {
+      _localDataProvider.clearAll();
     }
 
     final List<User>? users = await _apiClient.fetchUsers();

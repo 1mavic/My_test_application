@@ -7,6 +7,8 @@ abstract class UserEvent {}
 
 class GetUsersEvent extends UserEvent {}
 
+class GetUsersAndClearCache extends UserEvent {}
+
 class UserBlock extends Bloc<UserEvent, UserScreenState> {
   List<User> _users = <User>[];
 
@@ -23,6 +25,18 @@ class UserBlock extends Bloc<UserEvent, UserScreenState> {
         (GetUsersEvent event, Emitter<UserScreenState> emit) async {
       emit(UserLoadingState());
       final List<User> _usersList = await _userService.getUsers();
+      if (_usersList.isEmpty) {
+        emit(UserErrorState(error: "Получен пустой список пользователей"));
+        return;
+      }
+      _users = _usersList;
+      emit(UserListObtainedState());
+      return;
+    });
+    on<GetUsersAndClearCache>(
+        (GetUsersAndClearCache event, Emitter<UserScreenState> emit) async {
+      emit(UserLoadingState());
+      final List<User> _usersList = await _userService.getUsers(true);
       if (_usersList.isEmpty) {
         emit(UserErrorState(error: "Получен пустой список пользователей"));
         return;

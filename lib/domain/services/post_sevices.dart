@@ -11,7 +11,7 @@ class PostService {
   List<Post> makePosts(String newPosts) {
     try {
       final dynamic _posts = jsonDecode(newPosts);
-      final List<Post> posts = (_posts as List)
+      final List<Post> posts = (_posts as List<dynamic>)
           .map((dynamic post) => Post.fromJson(post as Map<String, dynamic>))
           .toList();
       return posts;

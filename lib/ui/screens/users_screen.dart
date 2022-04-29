@@ -5,6 +5,7 @@ import "package:flutter_test_application/domain/block/user_block/user_state.dart
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
 import "package:flutter_test_application/ui/widgets/user_card_widget.dart";
+import 'package:flutter_test_application/utils/cupertino_dialog.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({Key? key}) : super(key: key);
@@ -66,7 +67,10 @@ class _UserListWidget extends StatelessWidget {
     final List<User> _users = context.watch<UserBlock>().users;
     return RefreshIndicator(
       onRefresh: () async {
-        context.read<UserBlock>().add(GetUsersEvent());
+        final bool result = await showIosDialog(context) as bool;
+        context
+            .read<UserBlock>()
+            .add(result ? GetUsersAndClearCache() : GetUsersEvent());
       },
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 15),

@@ -11,7 +11,7 @@ class CommentService {
   List<Comment> makeAlbums(String newComments) {
     try {
       final dynamic _comments = jsonDecode(newComments);
-      final List<Comment> coments = (_comments as List)
+      final List<Comment> coments = (_comments as List<dynamic>)
           .map(
             (dynamic coments) =>
                 Comment.fromJson(coments as Map<String, dynamic>),
