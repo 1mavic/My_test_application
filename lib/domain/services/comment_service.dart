@@ -40,6 +40,14 @@ class CommentService {
     return comments;
   }
 
+  void saveComment(
+    List<Comment> comments,
+  ) {
+    final String commentsString =
+        jsonEncode(comments.map((Comment albums) => albums.toJson()).toList());
+    _localDataProvider.saveComments(commentsString, comments.first.postId);
+  }
+
   Future<int?> sendComment(
     int postId,
     String name,
