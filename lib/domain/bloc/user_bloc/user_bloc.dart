@@ -1,5 +1,5 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/block/user_block/user_state.dart";
+import 'package:flutter_test_application/domain/bloc/user_bloc/user_state.dart';
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
 import "package:flutter_test_application/domain/services/user_service.dart";
 
@@ -7,7 +7,7 @@ abstract class UserEvent {}
 
 class GetUsersEvent extends UserEvent {}
 
-class UserBlock extends Bloc<UserEvent, UserScreenState> {
+class UserBloc extends Bloc<UserEvent, UserScreenState> {
   List<User> _users = <User>[];
 
   List<User> get users => _users;
@@ -18,7 +18,7 @@ class UserBlock extends Bloc<UserEvent, UserScreenState> {
   }
 
   final UserService _userService = UserService();
-  UserBlock() : super(UserLoadingState()) {
+  UserBloc() : super(UserLoadingState()) {
     on<GetUsersEvent>(
         (GetUsersEvent event, Emitter<UserScreenState> emit) async {
       emit(UserLoadingState());

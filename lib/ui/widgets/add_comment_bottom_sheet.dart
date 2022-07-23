@@ -1,15 +1,15 @@
 import "package:flutter/material.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
-import "package:flutter_test_application/domain/block/comment_block/comment_block.dart";
+import 'package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.dart';
 import "package:flutter_test_application/styles/app_colors.dart";
 import "package:flutter_test_application/utils/form_validator.dart";
 
 class AddCommentWidget extends HookWidget {
   const AddCommentWidget({
     Key? key,
-    required this.commentBlock,
+    required this.commentBloc,
   }) : super(key: key);
-  final CommentBlock commentBlock;
+  final CommentBloc commentBloc;
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -58,7 +58,7 @@ class AddCommentWidget extends HookWidget {
           GestureDetector(
             onTap: () {
               if (_formKey.currentState?.validate() ?? false) {
-                commentBlock.add(
+                commentBloc.add(
                   SendCommentEvent(
                     _nameContorller.text,
                     _nameContorller.text,
