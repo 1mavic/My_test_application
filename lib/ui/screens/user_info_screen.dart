@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/block/album_block/album_block.dart";
-import "package:flutter_test_application/domain/block/album_block/album_state.dart";
-import "package:flutter_test_application/domain/block/post_block/post_block.dart";
-import "package:flutter_test_application/domain/block/post_block/posts_state.dart";
+import 'package:flutter_test_application/domain/bloc/album_bloc/album_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/album_bloc/album_state.dart';
+import 'package:flutter_test_application/domain/bloc/post_bloc/post_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/post_bloc/posts_state.dart';
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
@@ -44,7 +44,7 @@ class _PostList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostBlock, PostScreenState>(
+    return BlocBuilder<PostBloc, PostScreenState>(
       builder: (BuildContext context, PostScreenState state) {
         switch (state.runtimeType) {
           case PostLoadingState:
@@ -82,7 +82,7 @@ class _PostList extends StatelessWidget {
               ),
             );
           case PostListObtainedState:
-            final List<Post> _posts = context.watch<PostBlock>().posts;
+            final List<Post> _posts = context.watch<PostBloc>().posts;
             return PreviewWidget<Post>(
               items: _posts,
               routeToList: AppRoutes.userPostsAll,
@@ -102,7 +102,7 @@ class _AlbumList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AlbumBlock, AlbumScreenState>(
+    return BlocBuilder<AlbumBloc, AlbumScreenState>(
       builder: (BuildContext context, AlbumScreenState state) {
         switch (state.runtimeType) {
           case AlbumLoadingState:
@@ -140,7 +140,7 @@ class _AlbumList extends StatelessWidget {
               ),
             );
           case AlbumListObtainedState:
-            final List<Album> _albums = context.watch<AlbumBlock>().albums;
+            final List<Album> _albums = context.watch<AlbumBloc>().albums;
             return PreviewWidget<Album>(
               items: _albums,
               routeToList: AppRoutes.userAlbums,

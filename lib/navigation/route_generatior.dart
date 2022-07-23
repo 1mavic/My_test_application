@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/block/album_block/album_block.dart";
-import "package:flutter_test_application/domain/block/comment_block/comment_block.dart";
-import "package:flutter_test_application/domain/block/photo_block/photo_block.dart";
-import "package:flutter_test_application/domain/block/post_block/post_block.dart";
-import "package:flutter_test_application/domain/block/user_block/user_block.dart";
+import 'package:flutter_test_application/domain/bloc/album_bloc/album_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/photo_bloc/photo_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/post_bloc/post_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/user_bloc/user_bloc.dart';
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
@@ -21,8 +21,8 @@ class RouteGenerator {
 
   final Map<String, Widget Function(BuildContext p1)> routes =
       <String, Widget Function(BuildContext)>{
-    AppRoutes.home: (BuildContext context) => BlocProvider<UserBlock>(
-          create: (BuildContext context) => UserBlock()..add(GetUsersEvent()),
+    AppRoutes.home: (BuildContext context) => BlocProvider<UserBloc>(
+          create: (BuildContext context) => UserBloc()..add(GetUsersEvent()),
           child: const UsersScreen(),
         )
   };
@@ -35,13 +35,13 @@ class RouteGenerator {
           return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => MultiBlocProvider(
               providers: [
-                BlocProvider<PostBlock>(
+                BlocProvider<PostBloc>(
                   create: (BuildContext context) =>
-                      PostBlock()..add(GetPostsEvent(args.id)),
+                      PostBloc()..add(GetPostsEvent(args.id)),
                 ),
-                BlocProvider<AlbumBlock>(
+                BlocProvider<AlbumBloc>(
                   create: (BuildContext context) =>
-                      AlbumBlock()..add(GetAlbumsEvent(args.id)),
+                      AlbumBloc()..add(GetAlbumsEvent(args.id)),
                 )
               ],
               child: UserInfoScreen(user: args),
@@ -68,9 +68,9 @@ class RouteGenerator {
           return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => MultiBlocProvider(
               providers: [
-                BlocProvider<CommentBlock>(
+                BlocProvider<CommentBloc>(
                   create: (BuildContext context) =>
-                      CommentBlock()..add(GetCommentsEvent(args.id)),
+                      CommentBloc()..add(GetCommentsEvent(args.id)),
                 ),
               ],
               child: PostInfoScrenn(post: args),
@@ -83,9 +83,9 @@ class RouteGenerator {
           return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => MultiBlocProvider(
               providers: [
-                BlocProvider<PhotoBlock>(
+                BlocProvider<PhotoBloc>(
                   create: (BuildContext context) =>
-                      PhotoBlock()..add(GetPhotosEvent(args.id)),
+                      PhotoBloc()..add(GetPhotosEvent(args.id)),
                 ),
               ],
               child: AlbumInfoScreen(album: args),

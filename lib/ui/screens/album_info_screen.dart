@@ -1,8 +1,8 @@
 import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/block/photo_block/photo_block.dart";
-import "package:flutter_test_application/domain/block/photo_block/photo_state.dart";
+import 'package:flutter_test_application/domain/bloc/photo_bloc/photo_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/photo_bloc/photo_state.dart';
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
 import "package:flutter_test_application/styles/app_colors.dart";
@@ -35,7 +35,7 @@ class _AlbumdPhotosWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PhotoBlock, PhotoScreenState>(
+    return BlocBuilder<PhotoBloc, PhotoScreenState>(
       builder: (BuildContext context, PhotoScreenState state) {
         switch (state.runtimeType) {
           case PhotoLoadingState:
@@ -59,7 +59,7 @@ class _AlbumdPhotosWidget extends StatelessWidget {
               ),
             );
           case PhotoListObtainedState:
-            final List<Photo> _photos = context.watch<PhotoBlock>().photos;
+            final List<Photo> _photos = context.watch<PhotoBloc>().photos;
             if (_photos.isEmpty) {
               return const SizedBox.shrink();
             }

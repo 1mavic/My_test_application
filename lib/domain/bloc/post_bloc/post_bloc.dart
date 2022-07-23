@@ -1,5 +1,5 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/block/post_block/posts_state.dart";
+import 'package:flutter_test_application/domain/bloc/post_bloc/posts_state.dart';
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/domain/services/post_sevices.dart";
 
@@ -11,13 +11,13 @@ class GetPostsEvent extends PostsEvent {
   GetPostsEvent(this.id);
 }
 
-class PostBlock extends Bloc<PostsEvent, PostScreenState> {
+class PostBloc extends Bloc<PostsEvent, PostScreenState> {
   List<Post> _posts = <Post>[];
 
   List<Post> get posts => _posts;
 
   final PostService _postservice = PostService();
-  PostBlock() : super(PostLoadingState()) {
+  PostBloc() : super(PostLoadingState()) {
     on<GetPostsEvent>(
         (GetPostsEvent event, Emitter<PostScreenState> emit) async {
       emit(PostLoadingState());

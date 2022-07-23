@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/block/comment_block/comment_block.dart";
-import "package:flutter_test_application/domain/block/comment_block/comment_stat.dart";
+import 'package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/comment_bloc/comment_stat.dart';
 import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/styles/app_colors.dart";
@@ -15,7 +15,7 @@ class PostInfoScrenn extends StatelessWidget {
   final Post post;
   @override
   Widget build(BuildContext context) {
-    final CommentBlock _model = context.watch<CommentBlock>();
+    final CommentBloc _model = context.watch<CommentBloc>();
     return ScaffoldBodyTemplateWidget(
       appBarTitle: "Пост",
       body: Column(
@@ -38,7 +38,7 @@ class PostInfoScrenn extends StatelessWidget {
                   fullHeight: false,
                   context: context,
                   builder: (BuildContext context) =>
-                      AddCommentWidget(commentBlock: _model),
+                      AddCommentWidget(commentBloc: _model),
                 );
               },
               child: const Text("Добавить комментарий"),
@@ -93,7 +93,7 @@ class _CommentsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardWidget(
-      child: BlocBuilder<CommentBlock, CommentScreenState>(
+      child: BlocBuilder<CommentBloc, CommentScreenState>(
         builder: (BuildContext context, CommentScreenState state) {
           switch (state.runtimeType) {
             case CommentLoadingState:
@@ -128,7 +128,7 @@ class _CommentsWidget extends StatelessWidget {
               );
             case CommentListObtainedState:
               final List<Comment> _comments =
-                  context.watch<CommentBlock>().comments;
+                  context.watch<CommentBloc>().comments;
               return _CommentsListWidget(
                 comments: _comments,
               );

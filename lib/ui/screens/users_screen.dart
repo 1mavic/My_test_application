@@ -1,11 +1,13 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/block/user_block/user_block.dart";
-import "package:flutter_test_application/domain/block/user_block/user_state.dart";
+import 'package:flutter_test_application/domain/bloc/user_bloc/user_bloc.dart';
+import 'package:flutter_test_application/domain/bloc/user_bloc/user_state.dart';
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
+import 'package:flutter_test_application/localization/app_locale_keys.dart';
+import 'package:flutter_test_application/localization/app_localization.dart';
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
 import "package:flutter_test_application/ui/widgets/user_card_widget.dart";
-import 'package:flutter_test_application/utils/cupertino_dialog.dart';
+import 'package:flutter_test_application/utils/string_extensions.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({Key? key}) : super(key: key);
@@ -13,8 +15,8 @@ class UsersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBodyTemplateWidget(
-      appBarTitle: "Список пользователей",
-      body: BlocBuilder<UserBlock, UserScreenState>(
+      appBarTitle: context.localize(AppLocKeys.userList).firstToUpper(),
+      body: BlocBuilder<UserBloc, UserScreenState>(
         builder: (BuildContext context, UserScreenState state) {
           switch (state.runtimeType) {
             case UserLoadingState:
@@ -64,13 +66,10 @@ class _UserListWidget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final List<User> _users = context.watch<UserBlock>().users;
+    final List<User> _users = context.watch<UserBloc>().users;
     return RefreshIndicator(
       onRefresh: () async {
-        final bool result = await showIosDialog(context) as bool;
-        context
-            .read<UserBlock>()
-            .add(result ? GetUsersAndClearCache() : GetUsersEvent());
+        context.read<UserBloc>().add(GetUsersEvent());
       },
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 15),
