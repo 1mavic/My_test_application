@@ -7,6 +7,7 @@ abstract class UserEvent {}
 
 class GetUsersAndClearCache extends UserEvent {}
 
+
 class GetUsersEvent extends UserEvent {}
 
 class UserBloc extends Bloc<UserEvent, UserScreenState> {

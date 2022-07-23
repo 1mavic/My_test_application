@@ -57,6 +57,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentScreenState> {
           ),
         );
         _commentService.saveComment(_comments);
+
         emit(CommentListObtainedState());
       }
       return;
