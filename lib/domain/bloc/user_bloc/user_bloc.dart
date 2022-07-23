@@ -5,6 +5,9 @@ import "package:flutter_test_application/domain/services/user_service.dart";
 
 abstract class UserEvent {}
 
+class GetUsersAndClearCache extends UserEvent {}
+
+
 class GetUsersEvent extends UserEvent {}
 
 class UserBloc extends Bloc<UserEvent, UserScreenState> {
@@ -23,6 +26,18 @@ class UserBloc extends Bloc<UserEvent, UserScreenState> {
         (GetUsersEvent event, Emitter<UserScreenState> emit) async {
       emit(UserLoadingState());
       final List<User> _usersList = await _userService.getUsers();
+      if (_usersList.isEmpty) {
+        emit(UserErrorState(error: "Получен пустой список пользователей"));
+        return;
+      }
+      _users = _usersList;
+      emit(UserListObtainedState());
+      return;
+    });
+    on<GetUsersAndClearCache>(
+        (GetUsersAndClearCache event, Emitter<UserScreenState> emit) async {
+      emit(UserLoadingState());
+      final List<User> _usersList = await _userService.getUsers(true);
       if (_usersList.isEmpty) {
         emit(UserErrorState(error: "Получен пустой список пользователей"));
         return;

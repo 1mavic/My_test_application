@@ -11,7 +11,7 @@ class CommentService {
   List<Comment> makeAlbums(String newComments) {
     try {
       final dynamic _comments = jsonDecode(newComments);
-      final List<Comment> coments = (_comments as List)
+      final List<Comment> coments = (_comments as List<dynamic>)
           .map(
             (dynamic coments) =>
                 Comment.fromJson(coments as Map<String, dynamic>),
@@ -38,6 +38,14 @@ class CommentService {
         jsonEncode(comments.map((Comment albums) => albums.toJson()).toList());
     _localDataProvider.saveComments(commentsString, id);
     return comments;
+  }
+
+  void saveComment(
+    List<Comment> comments,
+  ) {
+    final String commentsString =
+        jsonEncode(comments.map((Comment albums) => albums.toJson()).toList());
+    _localDataProvider.saveComments(commentsString, comments.first.postId);
   }
 
   Future<int?> sendComment(
