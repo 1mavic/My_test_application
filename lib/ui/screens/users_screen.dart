@@ -1,13 +1,13 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/user_bloc/user_bloc.dart';
-import 'package:flutter_test_application/domain/bloc/user_bloc/user_state.dart';
+import "package:flutter_test_application/domain/bloc/user_bloc/user_bloc.dart";
+import "package:flutter_test_application/domain/bloc/user_bloc/user_state.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
-import 'package:flutter_test_application/localization/app_locale_keys.dart';
-import 'package:flutter_test_application/localization/app_localization.dart';
+import "package:flutter_test_application/localization/app_locale_keys.dart";
+import "package:flutter_test_application/localization/app_localization.dart";
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
 import "package:flutter_test_application/ui/widgets/user_card_widget.dart";
-import 'package:flutter_test_application/utils/string_extensions.dart';
+import "package:flutter_test_application/utils/string_extensions.dart";
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({Key? key}) : super(key: key);

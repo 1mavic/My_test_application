@@ -1,12 +1,17 @@
 import "dart:convert";
 
-import "package:flutter_test_application/domain/data_providers/api_client.dart";
-import "package:flutter_test_application/domain/data_providers/local_data_provider.dart";
+import "package:flutter_test_application/domain/data_providers/api_cleint/api_repository.dart";
+import "package:flutter_test_application/domain/data_providers/local_storage/local_data_provider.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 
 class PostService {
-  final ApiClient _apiClient = ApiClient();
-  final LocalDataProvider _localDataProvider = LocalDataProvider();
+  final ApiRepository _apiClient;
+  final LocalDataProvider _localDataProvider;
+
+  PostService(
+    this._apiClient,
+    this._localDataProvider,
+  );
 
   List<Post> makePosts(String newPosts) {
     try {

@@ -1,5 +1,5 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/album_bloc/album_state.dart';
+import "package:flutter_test_application/domain/bloc/album_bloc/album_state.dart";
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/services/album_service.dart";
 
@@ -16,8 +16,8 @@ class AlbumBloc extends Bloc<AlbumEvent, AlbumScreenState> {
 
   List<Album> get albums => _albums;
 
-  final AlbumService _albumService = AlbumService();
-  AlbumBloc() : super(AlbumLoadingState()) {
+  final AlbumService _albumService;
+  AlbumBloc(this._albumService) : super(AlbumLoadingState()) {
     on<GetAlbumsEvent>(
         (GetAlbumsEvent event, Emitter<AlbumScreenState> emit) async {
       emit(AlbumLoadingState());

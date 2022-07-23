@@ -1,5 +1,5 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/photo_bloc/photo_state.dart';
+import "package:flutter_test_application/domain/bloc/photo_bloc/photo_state.dart";
 import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
 import "package:flutter_test_application/domain/services/photo_service.dart";
 
@@ -16,8 +16,8 @@ class PhotoBloc extends Bloc<PhotoEvent, PhotoScreenState> {
 
   List<Photo> get photos => _photos;
 
-  final PhotoService _photoService = PhotoService();
-  PhotoBloc() : super(PhotoLoadingState()) {
+  final PhotoService _photoService;
+  PhotoBloc(this._photoService) : super(PhotoLoadingState()) {
     on<GetPhotosEvent>(
         (GetPhotosEvent event, Emitter<PhotoScreenState> emit) async {
       emit(PhotoLoadingState());

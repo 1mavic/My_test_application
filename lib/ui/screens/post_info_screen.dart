@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.dart';
-import 'package:flutter_test_application/domain/bloc/comment_bloc/comment_stat.dart';
+import "package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.dart";
+import "package:flutter_test_application/domain/bloc/comment_bloc/comment_stat.dart";
 import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/styles/app_colors.dart";

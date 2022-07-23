@@ -1,12 +1,11 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/user_bloc/user_state.dart';
+import "package:flutter_test_application/domain/bloc/user_bloc/user_state.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
 import "package:flutter_test_application/domain/services/user_service.dart";
 
 abstract class UserEvent {}
 
 class GetUsersAndClearCache extends UserEvent {}
-
 
 class GetUsersEvent extends UserEvent {}
 
@@ -20,8 +19,8 @@ class UserBloc extends Bloc<UserEvent, UserScreenState> {
     return _findedInsex != -1 ? _users[_findedInsex] : null;
   }
 
-  final UserService _userService = UserService();
-  UserBloc() : super(UserLoadingState()) {
+  final UserService _userService;
+  UserBloc(this._userService) : super(UserLoadingState()) {
     on<GetUsersEvent>(
         (GetUsersEvent event, Emitter<UserScreenState> emit) async {
       emit(UserLoadingState());
@@ -37,7 +36,8 @@ class UserBloc extends Bloc<UserEvent, UserScreenState> {
     on<GetUsersAndClearCache>(
         (GetUsersAndClearCache event, Emitter<UserScreenState> emit) async {
       emit(UserLoadingState());
-      final List<User> _usersList = await _userService.getUsers(true);
+      final List<User> _usersList =
+          await _userService.getUsers(clearCache: true);
       if (_usersList.isEmpty) {
         emit(UserErrorState(error: "Получен пустой список пользователей"));
         return;

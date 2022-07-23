@@ -1,12 +1,17 @@
 import "dart:convert";
 
-import "package:flutter_test_application/domain/data_providers/api_client.dart";
-import "package:flutter_test_application/domain/data_providers/local_data_provider.dart";
+import "package:flutter_test_application/domain/data_providers/api_cleint/api_repository.dart";
+import "package:flutter_test_application/domain/data_providers/local_storage/local_data_provider.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
 
 class UserService {
-  final ApiClient _apiClient = ApiClient();
-  final LocalDataProvider _localDataProvider = LocalDataProvider();
+  final ApiRepository _apiClient;
+  final LocalDataProvider _localDataProvider;
+
+  UserService(
+    this._apiClient,
+    this._localDataProvider,
+  );
 
   List<User> makeUsers(String newUsers) {
     try {
@@ -20,7 +25,7 @@ class UserService {
     }
   }
 
-  Future<List<User>> getUsers([bool clearCache = false]) async {
+  Future<List<User>> getUsers({bool clearCache = false}) async {
     if (!clearCache) {
       final String? localUsers = _localDataProvider.checkUser();
       if (localUsers != null) {

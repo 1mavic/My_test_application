@@ -1,5 +1,5 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/comment_bloc/comment_stat.dart';
+import "package:flutter_test_application/domain/bloc/comment_bloc/comment_stat.dart";
 import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
 import "package:flutter_test_application/domain/services/comment_service.dart";
 
@@ -24,8 +24,8 @@ class CommentBloc extends Bloc<CommentEvent, CommentScreenState> {
 
   List<Comment> get comments => _comments;
 
-  final CommentService _commentService = CommentService();
-  CommentBloc() : super(CommentLoadingState()) {
+  final CommentService _commentService;
+  CommentBloc(this._commentService) : super(CommentLoadingState()) {
     on<GetCommentsEvent>(
         (GetCommentsEvent event, Emitter<CommentScreenState> emit) async {
       emit(CommentLoadingState());

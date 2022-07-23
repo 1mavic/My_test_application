@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test_application/localization/app_localization.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter_test_application/localization/app_localization.dart";
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
   @override

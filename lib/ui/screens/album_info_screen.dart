@@ -1,8 +1,8 @@
 import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/photo_bloc/photo_bloc.dart';
-import 'package:flutter_test_application/domain/bloc/photo_bloc/photo_state.dart';
+import "package:flutter_test_application/domain/bloc/photo_bloc/photo_bloc.dart";
+import "package:flutter_test_application/domain/bloc/photo_bloc/photo_state.dart";
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
 import "package:flutter_test_application/styles/app_colors.dart";

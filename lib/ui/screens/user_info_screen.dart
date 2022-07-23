@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/album_bloc/album_bloc.dart';
-import 'package:flutter_test_application/domain/bloc/album_bloc/album_state.dart';
-import 'package:flutter_test_application/domain/bloc/post_bloc/post_bloc.dart';
-import 'package:flutter_test_application/domain/bloc/post_bloc/posts_state.dart';
+import "package:flutter_test_application/domain/bloc/album_bloc/album_bloc.dart";
+import "package:flutter_test_application/domain/bloc/album_bloc/album_state.dart";
+import "package:flutter_test_application/domain/bloc/post_bloc/post_bloc.dart";
+import "package:flutter_test_application/domain/bloc/post_bloc/posts_state.dart";
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";

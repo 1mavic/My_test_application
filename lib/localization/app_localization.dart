@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test_application/localization/app_locale_keys.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test_application/localization/app_locale_keys.dart";
 
 class AppLocalization {
   final Locale locale;
@@ -11,13 +11,13 @@ class AppLocalization {
 
   static final Map<String, Map<AppLocKeys, String>> _db =
       <String, Map<AppLocKeys, String>>{
-    "en": {
+    "en": <AppLocKeys, String>{
       AppLocKeys.userList: "user list",
     },
-    "ru": {
+    "ru": <AppLocKeys, String>{
       AppLocKeys.userList: "список пользователей",
     },
-    "fi": {
+    "fi": <AppLocKeys, String>{
       AppLocKeys.userList: "luettelo käyttäjistä",
     },
   };
