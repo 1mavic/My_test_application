@@ -2,9 +2,11 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test_application/domain/bloc/album_bloc/album_bloc.dart";
 import "package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.dart";
+import 'package:flutter_test_application/domain/bloc/error_bloc/error_bloc.dart';
 import "package:flutter_test_application/domain/bloc/photo_bloc/photo_bloc.dart";
 import "package:flutter_test_application/domain/bloc/post_bloc/post_bloc.dart";
 import "package:flutter_test_application/domain/bloc/user_bloc/user_bloc.dart";
+import 'package:flutter_test_application/domain/data_providers/api_cleint/api_repository.dart';
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
 import "package:flutter_test_application/domain/entity/user/user_model.dart";
@@ -31,12 +33,14 @@ class RouteGenerator {
     required this.albumService,
     required this.commentService,
     required this.photoService,
+    required this.apiRepository,
   });
   final UserService userService;
   final PostService postService;
   final AlbumService albumService;
   final CommentService commentService;
   final PhotoService photoService;
+  final ApiRepository apiRepository;
   final String initialRoute = AppRoutes.home;
 
   Route<dynamic> onGenerateRoute(RouteSettings setting) {
@@ -44,9 +48,16 @@ class RouteGenerator {
     switch (setting.name) {
       case AppRoutes.home:
         return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => BlocProvider<UserBloc>(
-            create: (BuildContext context) =>
-                UserBloc(userService)..add(GetUsersEvent()),
+          builder: (BuildContext context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<UserBloc>(
+                create: (BuildContext context) =>
+                    UserBloc(userService)..add(GetUsersEvent()),
+              ),
+              BlocProvider<ErrorBloc>(
+                create: (BuildContext context) => ErrorBloc(apiRepository),
+              )
+            ],
             child: const UsersScreen(),
           ),
         );

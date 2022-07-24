@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
     albumService: _diContainer.makeAlbumService(),
     commentService: _diContainer.makeCommentService(),
     photoService: _diContainer.makePhotoService(),
+    apiRepository: _diContainer.makeApiRepository(),
   );
 
   @override
