@@ -13,6 +13,8 @@ import "package:flutter_test_application/domain/services/comment_service.dart";
 import "package:flutter_test_application/domain/services/photo_service.dart";
 import "package:flutter_test_application/domain/services/post_sevices.dart";
 import "package:flutter_test_application/domain/services/user_service.dart";
+import "package:flutter_test_application/localization/app_locale_keys.dart";
+import "package:flutter_test_application/localization/app_localization.dart";
 import "package:flutter_test_application/navigation/routes.dart";
 import "package:flutter_test_application/ui/screens/album_info_screen.dart";
 import "package:flutter_test_application/ui/screens/albums_user_screen.dart";
@@ -20,6 +22,7 @@ import "package:flutter_test_application/ui/screens/post_all_screen.dart";
 import "package:flutter_test_application/ui/screens/post_info_screen.dart";
 import "package:flutter_test_application/ui/screens/user_info_screen.dart";
 import "package:flutter_test_application/ui/screens/users_screen.dart";
+import "package:flutter_test_application/utils/string_extensions.dart";
 
 class RouteGenerator {
   RouteGenerator({
@@ -117,10 +120,21 @@ class RouteGenerator {
 
   static Route<dynamic> _errorRoute() {
     return MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) => Scaffold(
-        appBar: AppBar(),
-        body: const Center(
-          child: Text("Ошибка навигации"),
+      builder: (BuildContext context) => const _NavigationErrorScreen(),
+    );
+  }
+}
+
+class _NavigationErrorScreen extends StatelessWidget {
+  const _NavigationErrorScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Text(
+          context.localize(AppLocKeys.navigationError).firstToUpper(),
         ),
       ),
     );

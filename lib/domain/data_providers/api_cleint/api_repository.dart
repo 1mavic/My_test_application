@@ -1,8 +1,6 @@
 import "dart:developer";
-
-import "package:dio/dio.dart";
 import "package:flutter_test_application/config/environment.dart";
-import 'package:flutter_test_application/domain/data_providers/api_cleint/dio_api_client.dart';
+import "package:flutter_test_application/domain/data_providers/api_cleint/dio_api_client.dart";
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
 import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
@@ -19,7 +17,7 @@ class ApiRepository {
   Future<List<User>?> fetchUsers() async {
     try {
       final dynamic response = await _apiClient.get("$_baseUrl/users");
-      final List<User> users = (response.data as List<dynamic>? ?? <dynamic>[])
+      final List<User> users = (response as List<dynamic>? ?? <dynamic>[])
           .map(
             (dynamic user) => User.fromJson(
               user as Map<String, dynamic>,
@@ -37,7 +35,7 @@ class ApiRepository {
     try {
       final dynamic response =
           await _apiClient.get("$_baseUrl/posts?userId=$userId");
-      final List<Post> posts = (response.data as List<dynamic>? ?? <dynamic>[])
+      final List<Post> posts = (response as List<dynamic>? ?? <dynamic>[])
           .map(
             (dynamic posts) => Post.fromJson(
               posts as Map<String, dynamic>,
@@ -55,14 +53,13 @@ class ApiRepository {
     try {
       final dynamic response =
           await _apiClient.get("$_baseUrl/comments?postId=$postId");
-      final List<Comment> comments =
-          (response.data as List<dynamic>? ?? <dynamic>[])
-              .map(
-                (dynamic comment) => Comment.fromJson(
-                  comment as Map<String, dynamic>,
-                ),
-              )
-              .toList();
+      final List<Comment> comments = (response as List<dynamic>? ?? <dynamic>[])
+          .map(
+            (dynamic comment) => Comment.fromJson(
+              comment as Map<String, dynamic>,
+            ),
+          )
+          .toList();
       return comments;
     } catch (e) {
       log(e.toString());
@@ -74,14 +71,13 @@ class ApiRepository {
     try {
       final dynamic response =
           await _apiClient.get("$_baseUrl/albums?userId=$userId");
-      final List<Album> albums =
-          (response.data as List<dynamic>? ?? <dynamic>[])
-              .map(
-                (dynamic album) => Album.fromJson(
-                  album as Map<String, dynamic>,
-                ),
-              )
-              .toList();
+      final List<Album> albums = (response as List<dynamic>? ?? <dynamic>[])
+          .map(
+            (dynamic album) => Album.fromJson(
+              album as Map<String, dynamic>,
+            ),
+          )
+          .toList();
       return albums;
     } catch (e) {
       log(e.toString());
@@ -93,13 +89,11 @@ class ApiRepository {
     try {
       final dynamic response =
           await _apiClient.get("$_baseUrl/photos?albumId=$albumId");
-      final List<Photo> photos =
-          (response.data as List<dynamic>? ?? <dynamic>[])
-              .map(
-                (dynamic photos) =>
-                    Photo.fromJson(photos as Map<String, dynamic>),
-              )
-              .toList();
+      final List<Photo> photos = (response as List<dynamic>? ?? <dynamic>[])
+          .map(
+            (dynamic photos) => Photo.fromJson(photos as Map<String, dynamic>),
+          )
+          .toList();
       return photos;
     } catch (e) {
       log(e.toString());
@@ -118,9 +112,8 @@ class ApiRepository {
           "body": newComment.body
         },
       );
-      if (response.statusCode == 201) {
-        final Map<String, dynamic> _data =
-            response.data as Map<String, dynamic>;
+      if (response != null) {
+        final Map<String, dynamic> _data = response as Map<String, dynamic>;
         final int _id = _data["id"] as int;
         return _id;
       }

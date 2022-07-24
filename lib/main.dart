@@ -1,5 +1,11 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import "package:flutter/material.dart";
-import "package:flutter_localizations/flutter_localizations.dart";
+import "package:flutter_localizations/flutter_localizations.dart"
+    show
+        GlobalCupertinoLocalizations,
+        GlobalMaterialLocalizations,
+        GlobalWidgetsLocalizations;
 import "package:flutter_test_application/config/environment.dart";
 import "package:flutter_test_application/diContainer/di_container.dart";
 import "package:flutter_test_application/localization/localization_delegate.dart";

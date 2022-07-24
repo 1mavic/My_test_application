@@ -5,10 +5,13 @@ import "package:flutter_test_application/domain/bloc/photo_bloc/photo_bloc.dart"
 import "package:flutter_test_application/domain/bloc/photo_bloc/photo_state.dart";
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
+import "package:flutter_test_application/localization/app_locale_keys.dart";
+import "package:flutter_test_application/localization/app_localization.dart";
 import "package:flutter_test_application/styles/app_colors.dart";
 import "package:flutter_test_application/ui/widgets/card_widget.dart";
 import "package:flutter_test_application/ui/widgets/image_widget.dart";
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
+import "package:flutter_test_application/utils/string_extensions.dart";
 
 class AlbumInfoScreen extends StatelessWidget {
   const AlbumInfoScreen({Key? key, required this.album}) : super(key: key);
@@ -16,7 +19,7 @@ class AlbumInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBodyTemplateWidget(
-      appBarTitle: "Альбом",
+      appBarTitle: context.localize(AppLocKeys.userList).firstToUpper(),
       body: Column(
         children: <Widget>[
           Text("Album: ${album.title}"),

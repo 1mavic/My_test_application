@@ -4,11 +4,14 @@ import "package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.d
 import "package:flutter_test_application/domain/bloc/comment_bloc/comment_stat.dart";
 import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
+import "package:flutter_test_application/localization/app_locale_keys.dart";
+import "package:flutter_test_application/localization/app_localization.dart";
 import "package:flutter_test_application/styles/app_colors.dart";
 import "package:flutter_test_application/ui/widgets/add_comment_bottom_sheet.dart";
 import "package:flutter_test_application/ui/widgets/card_widget.dart";
 import "package:flutter_test_application/ui/widgets/modal_bottom_sheet_template.dart";
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
+import "package:flutter_test_application/utils/string_extensions.dart";
 
 class PostInfoScrenn extends StatelessWidget {
   const PostInfoScrenn({Key? key, required this.post}) : super(key: key);
@@ -41,7 +44,9 @@ class PostInfoScrenn extends StatelessWidget {
                       AddCommentWidget(commentBloc: _model),
                 );
               },
-              child: const Text("Добавить комментарий"),
+              child: Text(
+                context.localize(AppLocKeys.userList).firstToUpper(),
+              ),
             ),
           )
         ],
@@ -148,8 +153,10 @@ class _CommentsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (comments.isEmpty) {
-      return const Center(
-        child: Text("Будьте первым! :)"),
+      return Center(
+        child: Text(
+          context.localize(AppLocKeys.beFirst).firstToUpper(),
+        ),
       );
     }
     return ListView.separated(
@@ -184,7 +191,7 @@ class _CommentWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text("Имя: $name"),
+        Text("${context.localize(AppLocKeys.name).firstToUpper()} $name"),
         const SizedBox(
           height: 5,
         ),

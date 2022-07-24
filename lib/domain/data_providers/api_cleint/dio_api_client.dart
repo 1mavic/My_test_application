@@ -1,4 +1,6 @@
+import "dart:developer";
 import "package:dio/dio.dart";
+import "package:flutter/foundation.dart";
 
 abstract class ApiClient {
   Future<dynamic> post(
@@ -59,5 +61,27 @@ class DioApi extends ApiClient {
     } catch (e) {
       rethrow;
     }
+  }
+}
+
+class CustomInterceptors extends Interceptor {
+  CustomInterceptors();
+  // final StreamController<DioError> _errorStreamController;
+  @override
+  void onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
+    if (kDebugMode) {
+      log("RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}");
+    }
+    return super.onResponse(response, handler);
+  }
+
+  @override
+  void onError(DioError err, ErrorInterceptorHandler handler) {
+    log("ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}");
+    // _errorStreamController.sink.add(err);
+    return handler.reject(err);
   }
 }

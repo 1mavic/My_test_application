@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
+import "package:flutter_test_application/localization/app_locale_keys.dart";
+import "package:flutter_test_application/localization/app_localization.dart";
 import "package:flutter_test_application/styles/app_colors.dart";
 import "package:flutter_test_application/ui/widgets/card_widget.dart";
+import "package:flutter_test_application/utils/string_extensions.dart";
 
 class PreviewWidget<T> extends StatelessWidget {
   const PreviewWidget({
@@ -63,7 +66,9 @@ class PreviewWidget<T> extends StatelessWidget {
                     arguments: items,
                   );
                 },
-                child: const Text("Просмотреть все"),
+                child: Text(
+                  context.localize(AppLocKeys.userList).firstToUpper(),
+                ),
               ),
             )
         ],
