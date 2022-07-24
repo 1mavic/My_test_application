@@ -7,6 +7,7 @@ import "package:flutter_test_application/localization/app_locale_keys.dart";
 import "package:flutter_test_application/localization/app_localization.dart";
 import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
 import "package:flutter_test_application/ui/widgets/user_card_widget.dart";
+import 'package:flutter_test_application/utils/cupertino_dialog.dart';
 import "package:flutter_test_application/utils/string_extensions.dart";
 
 class UsersScreen extends StatelessWidget {
@@ -60,16 +61,28 @@ class UsersScreen extends StatelessWidget {
   }
 }
 
-class _UserListWidget extends StatelessWidget {
+class _UserListWidget extends StatefulWidget {
   const _UserListWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<_UserListWidget> createState() => _UserListWidgetState();
+}
+
+class _UserListWidgetState extends State<_UserListWidget> {
   @override
   Widget build(BuildContext context) {
     final List<User> _users = context.watch<UserBloc>().users;
     return RefreshIndicator(
       onRefresh: () async {
-        context.read<UserBloc>().add(GetUsersEvent());
+        final bool? result = await showIosDialog<bool>(context);
+        if (!mounted) {
+          return;
+        }
+        if (result == true) {
+          context.read<UserBloc>().add(GetUsersAndClearCache());
+        }
       },
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 15),

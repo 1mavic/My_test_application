@@ -32,7 +32,7 @@ class DioApi extends ApiClient {
   }) async {
     try {
       final Response<dynamic> response = await _dio.get(
-        uri,
+        baseUrl + uri,
         queryParameters: queryParameters,
       );
       return response.data;
@@ -51,7 +51,7 @@ class DioApi extends ApiClient {
   }) async {
     try {
       final Response<dynamic> response = await _dio.post(
-        uri,
+        baseUrl + uri,
         data: data,
         queryParameters: queryParameters,
       );
