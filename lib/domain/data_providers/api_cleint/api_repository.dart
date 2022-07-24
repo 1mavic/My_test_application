@@ -1,6 +1,7 @@
-import "dart:developer";
+import "dart:async";
 import "package:flutter_test_application/domain/data_providers/api_cleint/dio_api_client.dart";
 import "package:flutter_test_application/domain/entity/album/album_model.dart";
+import "package:flutter_test_application/domain/entity/api_errors/api_error.dart";
 import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
 import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
 import "package:flutter_test_application/domain/entity/post/post_model.dart";
@@ -8,7 +9,10 @@ import "package:flutter_test_application/domain/entity/user/user_model.dart";
 
 class ApiRepository {
   final ApiClient _apiClient;
-  // final String _baseUrl = env.apiUrl;
+
+  final StreamController<ApiError> _errorStream = StreamController<ApiError>();
+
+  Stream<ApiError> get errorStream => _errorStream.stream;
 
   ApiRepository(this._apiClient);
 
@@ -23,8 +27,11 @@ class ApiRepository {
           )
           .toList();
       return users;
+    } on ApiError catch (apiException) {
+      _errorStream.sink.add(apiException);
+      return null;
     } catch (e) {
-      log(e.toString());
+      _errorStream.sink.add(UnExpectedException());
       return null;
     }
   }
@@ -40,8 +47,11 @@ class ApiRepository {
           )
           .toList();
       return posts;
+    } on ApiError catch (apiException) {
+      _errorStream.sink.add(apiException);
+      return null;
     } catch (e) {
-      log(e.toString());
+      _errorStream.sink.add(UnExpectedException());
       return null;
     }
   }
@@ -57,8 +67,11 @@ class ApiRepository {
           )
           .toList();
       return comments;
+    } on ApiError catch (apiException) {
+      _errorStream.sink.add(apiException);
+      return null;
     } catch (e) {
-      log(e.toString());
+      _errorStream.sink.add(UnExpectedException());
       return null;
     }
   }
@@ -74,8 +87,11 @@ class ApiRepository {
           )
           .toList();
       return albums;
+    } on ApiError catch (apiException) {
+      _errorStream.sink.add(apiException);
+      return null;
     } catch (e) {
-      log(e.toString());
+      _errorStream.sink.add(UnExpectedException());
       return null;
     }
   }
@@ -89,8 +105,11 @@ class ApiRepository {
           )
           .toList();
       return photos;
+    } on ApiError catch (apiException) {
+      _errorStream.sink.add(apiException);
+      return null;
     } catch (e) {
-      log(e.toString());
+      _errorStream.sink.add(UnExpectedException());
       return null;
     }
   }
@@ -112,9 +131,16 @@ class ApiRepository {
         return _id;
       }
       return null;
+    } on ApiError catch (apiException) {
+      _errorStream.sink.add(apiException);
+      return null;
     } catch (e) {
-      log(e.toString());
+      _errorStream.sink.add(UnExpectedException());
       return null;
     }
+  }
+
+  void dispose() {
+    _errorStream.close();
   }
 }

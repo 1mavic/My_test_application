@@ -1,6 +1,8 @@
 import "dart:developer";
+import "dart:io";
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
+import "package:flutter_test_application/domain/entity/api_errors/api_error.dart";
 
 abstract class ApiClient {
   Future<dynamic> post(
@@ -25,6 +27,17 @@ class DioApi extends ApiClient {
     _dio.interceptors.addAll(interceptors ?? <Interceptor>[]);
   }
 
+  ApiError _errorMessage(DioError e) {
+    switch (e.type) {
+      case DioErrorType.connectTimeout:
+        return RequestTimeOut();
+      case DioErrorType.sendTimeout:
+        return SendTimeOut();
+      default:
+        return UnExpectedException();
+    }
+  }
+
   @override
   Future<dynamic> get(
     String uri, {
@@ -36,6 +49,10 @@ class DioApi extends ApiClient {
         queryParameters: queryParameters,
       );
       return response.data;
+    } on SocketException catch (_) {
+      throw NoInternetException();
+    } on DioError catch (e) {
+      throw _errorMessage(e);
     } on FormatException catch (_) {
       throw const FormatException("Unable to process the data");
     } catch (e) {
@@ -56,6 +73,10 @@ class DioApi extends ApiClient {
         queryParameters: queryParameters,
       );
       return response.data;
+    } on SocketException catch (_) {
+      throw NoInternetException();
+    } on DioError catch (e) {
+      throw _errorMessage(e);
     } on FormatException catch (_) {
       throw const FormatException("Unable to process the data");
     } catch (e) {
@@ -81,7 +102,6 @@ class CustomInterceptors extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     log("ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}");
-    // _errorStreamController.sink.add(err);
     return handler.reject(err);
   }
 }

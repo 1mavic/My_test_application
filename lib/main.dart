@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: scaffoldMessengerState,
       theme: appTheme,
       initialRoute: _route.initialRoute,
       onGenerateRoute: _route.onGenerateRoute,
@@ -57,4 +58,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
+GlobalKey<ScaffoldMessengerState> scaffoldMessengerState =
+    GlobalKey<ScaffoldMessengerState>();
 final DiContainer _diContainer = DiContainer();
