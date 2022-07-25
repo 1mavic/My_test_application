@@ -1,5 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:async';
+import 'dart:developer';
+
 import "package:flutter/material.dart";
 import "package:flutter_localizations/flutter_localizations.dart"
     show
@@ -14,14 +17,25 @@ import "package:flutter_test_application/styles/app_theme.dart";
 import "package:hive_flutter/hive_flutter.dart";
 
 Future<void> main() async {
-  await Hive.initFlutter();
-  await Hive.openBox<String>("users");
-  await Hive.openBox<String>("posts");
-  await Hive.openBox<String>("albums");
-  await Hive.openBox<String>("comments");
-  env = await loadEnvironment();
+  runZonedGuarded(
+    () async {
+      FlutterError.onError = (FlutterErrorDetails details) {
+        FlutterError.presentError(details);
+        log(details.toString());
+      };
+      await Hive.initFlutter();
+      await Hive.openBox<String>("users");
+      await Hive.openBox<String>("posts");
+      await Hive.openBox<String>("albums");
+      await Hive.openBox<String>("comments");
+      env = await loadEnvironment();
 
-  runApp(MyApp());
+      runApp(MyApp());
+    },
+    (Object error, StackTrace stack) {
+      log("${error.toString()} : ${stack.toString()}");
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
