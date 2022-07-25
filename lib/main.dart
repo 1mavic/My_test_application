@@ -1,7 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:async';
-import 'dart:developer';
+import "dart:async";
+import "dart:developer";
 
 import "package:flutter/material.dart";
 import "package:flutter_localizations/flutter_localizations.dart"
@@ -9,12 +9,12 @@ import "package:flutter_localizations/flutter_localizations.dart"
         GlobalCupertinoLocalizations,
         GlobalMaterialLocalizations,
         GlobalWidgetsLocalizations;
-import "package:flutter_test_application/config/environment.dart";
-import "package:flutter_test_application/diContainer/di_container.dart";
-import "package:flutter_test_application/localization/localization_delegate.dart";
-import "package:flutter_test_application/navigation/route_generatior.dart";
-import "package:flutter_test_application/styles/app_theme.dart";
 import "package:hive_flutter/hive_flutter.dart";
+import "package:my_app/config/environment.dart";
+import "package:my_app/diContainer/di_container.dart";
+import "package:my_app/localization/localization_delegate.dart";
+import "package:my_app/navigation/route_generatior.dart";
+import "package:my_app/styles/app_theme.dart";
 
 Future<void> main() async {
   runZonedGuarded(

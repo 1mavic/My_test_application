@@ -1,5 +1,5 @@
-import "package:flutter_test_application/domain/entity/geo/geo_model.dart";
 import "package:json_annotation/json_annotation.dart";
+import "package:my_app/domain/entity/geo/geo_model.dart";
 
 part "address_model.g.dart";
 

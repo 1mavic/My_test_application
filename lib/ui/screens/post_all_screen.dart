@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import "package:flutter_test_application/domain/entity/post/post_model.dart";
-import "package:flutter_test_application/navigation/routes.dart";
-import "package:flutter_test_application/ui/widgets/preview_list_widget.dart";
-import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
+import "package:my_app/domain/entity/post/post_model.dart";
+import "package:my_app/navigation/routes.dart";
+import "package:my_app/ui/widgets/preview_list_widget.dart";
+import "package:my_app/ui/widgets/scaffold_template_widget.dart";
 
 class AllPostsScreen extends StatelessWidget {
   const AllPostsScreen({Key? key, required this.posts}) : super(key: key);

@@ -1,5 +1,5 @@
-import "package:flutter_test_application/domain/data_providers/api_cleint/api_repository.dart";
-import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
+import "package:my_app/domain/data_providers/api_cleint/api_repository.dart";
+import "package:my_app/domain/entity/photo/photo_model.dart";
 
 class PhotoService {
   final ApiRepository _apiClient;

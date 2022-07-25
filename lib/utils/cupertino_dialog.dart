@@ -1,7 +1,7 @@
 import "package:flutter/cupertino.dart";
-import "package:flutter_test_application/localization/app_locale_keys.dart";
-import "package:flutter_test_application/localization/app_localization.dart";
-import "package:flutter_test_application/utils/string_extensions.dart";
+import "package:my_app/localization/app_locale_keys.dart";
+import "package:my_app/localization/app_localization.dart";
+import "package:my_app/utils/string_extensions.dart";
 
 Future<bool?> showIosDialog<bool>(BuildContext context) =>
     showCupertinoDialog<bool>(

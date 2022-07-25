@@ -1,30 +1,30 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/album_bloc/album_bloc.dart";
-import "package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.dart";
-import 'package:flutter_test_application/domain/bloc/error_bloc/error_bloc.dart';
-import "package:flutter_test_application/domain/bloc/photo_bloc/photo_bloc.dart";
-import "package:flutter_test_application/domain/bloc/post_bloc/post_bloc.dart";
-import "package:flutter_test_application/domain/bloc/user_bloc/user_bloc.dart";
-import 'package:flutter_test_application/domain/data_providers/api_cleint/api_repository.dart';
-import "package:flutter_test_application/domain/entity/album/album_model.dart";
-import "package:flutter_test_application/domain/entity/post/post_model.dart";
-import "package:flutter_test_application/domain/entity/user/user_model.dart";
-import "package:flutter_test_application/domain/services/album_service.dart";
-import "package:flutter_test_application/domain/services/comment_service.dart";
-import "package:flutter_test_application/domain/services/photo_service.dart";
-import "package:flutter_test_application/domain/services/post_sevices.dart";
-import "package:flutter_test_application/domain/services/user_service.dart";
-import "package:flutter_test_application/localization/app_locale_keys.dart";
-import "package:flutter_test_application/localization/app_localization.dart";
-import "package:flutter_test_application/navigation/routes.dart";
-import "package:flutter_test_application/ui/screens/album_info_screen.dart";
-import "package:flutter_test_application/ui/screens/albums_user_screen.dart";
-import "package:flutter_test_application/ui/screens/post_all_screen.dart";
-import "package:flutter_test_application/ui/screens/post_info_screen.dart";
-import "package:flutter_test_application/ui/screens/user_info_screen.dart";
-import "package:flutter_test_application/ui/screens/users_screen.dart";
-import "package:flutter_test_application/utils/string_extensions.dart";
+import "package:my_app/domain/bloc/album_bloc/album_bloc.dart";
+import "package:my_app/domain/bloc/comment_bloc/comment_bloc.dart";
+import "package:my_app/domain/bloc/error_bloc/error_bloc.dart";
+import "package:my_app/domain/bloc/photo_bloc/photo_bloc.dart";
+import "package:my_app/domain/bloc/post_bloc/post_bloc.dart";
+import "package:my_app/domain/bloc/user_bloc/user_bloc.dart";
+import "package:my_app/domain/data_providers/api_cleint/api_repository.dart";
+import "package:my_app/domain/entity/album/album_model.dart";
+import "package:my_app/domain/entity/post/post_model.dart";
+import "package:my_app/domain/entity/user/user_model.dart";
+import "package:my_app/domain/services/album_service.dart";
+import "package:my_app/domain/services/comment_service.dart";
+import "package:my_app/domain/services/photo_service.dart";
+import "package:my_app/domain/services/post_sevices.dart";
+import "package:my_app/domain/services/user_service.dart";
+import "package:my_app/localization/app_locale_keys.dart";
+import "package:my_app/localization/app_localization.dart";
+import "package:my_app/navigation/routes.dart";
+import "package:my_app/ui/screens/album_info_screen.dart";
+import "package:my_app/ui/screens/albums_user_screen.dart";
+import "package:my_app/ui/screens/post_all_screen.dart";
+import "package:my_app/ui/screens/post_info_screen.dart";
+import "package:my_app/ui/screens/user_info_screen.dart";
+import "package:my_app/ui/screens/users_screen.dart";
+import "package:my_app/utils/string_extensions.dart";
 
 class RouteGenerator {
   RouteGenerator({
@@ -49,7 +49,7 @@ class RouteGenerator {
       case AppRoutes.home:
         return MaterialPageRoute<dynamic>(
           builder: (BuildContext context) => MultiBlocProvider(
-            providers: [
+            providers: <BlocProvider<dynamic>>[
               BlocProvider<UserBloc>(
                 create: (BuildContext context) =>
                     UserBloc(userService)..add(GetUsersEvent()),

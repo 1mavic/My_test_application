@@ -1,17 +1,17 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/album_bloc/album_bloc.dart";
-import "package:flutter_test_application/domain/bloc/album_bloc/album_state.dart";
-import "package:flutter_test_application/domain/bloc/post_bloc/post_bloc.dart";
-import "package:flutter_test_application/domain/bloc/post_bloc/posts_state.dart";
-import "package:flutter_test_application/domain/entity/album/album_model.dart";
-import "package:flutter_test_application/domain/entity/post/post_model.dart";
-import "package:flutter_test_application/domain/entity/user/user_model.dart";
-import "package:flutter_test_application/navigation/routes.dart";
-import "package:flutter_test_application/ui/widgets/card_widget.dart";
-import "package:flutter_test_application/ui/widgets/preview_list_widget.dart";
-import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
-import "package:flutter_test_application/ui/widgets/user_card_widget.dart";
+import "package:my_app/domain/bloc/album_bloc/album_bloc.dart";
+import "package:my_app/domain/bloc/album_bloc/album_state.dart";
+import "package:my_app/domain/bloc/post_bloc/post_bloc.dart";
+import "package:my_app/domain/bloc/post_bloc/posts_state.dart";
+import "package:my_app/domain/entity/album/album_model.dart";
+import "package:my_app/domain/entity/post/post_model.dart";
+import "package:my_app/domain/entity/user/user_model.dart";
+import "package:my_app/navigation/routes.dart";
+import "package:my_app/ui/widgets/card_widget.dart";
+import "package:my_app/ui/widgets/preview_list_widget.dart";
+import "package:my_app/ui/widgets/scaffold_template_widget.dart";
+import "package:my_app/ui/widgets/user_card_widget.dart";
 
 class UserInfoScreen extends StatelessWidget {
   const UserInfoScreen({Key? key, required this.user}) : super(key: key);

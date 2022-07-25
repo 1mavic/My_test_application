@@ -1,4 +1,4 @@
-import 'package:flutter_test_application/domain/entity/api_errors/api_error.dart';
+import "package:my_app/domain/entity/api_errors/api_error.dart";
 
 abstract class ErrorState {}
 

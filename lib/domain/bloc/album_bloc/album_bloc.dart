@@ -1,7 +1,7 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/album_bloc/album_state.dart";
-import "package:flutter_test_application/domain/entity/album/album_model.dart";
-import "package:flutter_test_application/domain/services/album_service.dart";
+import "package:my_app/domain/bloc/album_bloc/album_state.dart";
+import "package:my_app/domain/entity/album/album_model.dart";
+import "package:my_app/domain/services/album_service.dart";
 
 abstract class AlbumEvent {}
 

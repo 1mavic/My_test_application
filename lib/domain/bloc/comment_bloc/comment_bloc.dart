@@ -1,7 +1,7 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/comment_bloc/comment_stat.dart";
-import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
-import "package:flutter_test_application/domain/services/comment_service.dart";
+import "package:my_app/domain/bloc/comment_bloc/comment_stat.dart";
+import "package:my_app/domain/entity/comment/comment_model.dart";
+import "package:my_app/domain/services/comment_service.dart";
 
 abstract class CommentEvent {}
 

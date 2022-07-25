@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:flutter_test_application/styles/app_colors.dart";
+import "package:my_app/styles/app_colors.dart";
 
 class CardWidget extends StatelessWidget {
   const CardWidget({Key? key, required this.child}) : super(key: key);

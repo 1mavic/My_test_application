@@ -1,8 +1,8 @@
 import "dart:convert";
 
-import "package:flutter_test_application/domain/data_providers/api_cleint/api_repository.dart";
-import "package:flutter_test_application/domain/data_providers/local_storage/local_data_provider.dart";
-import "package:flutter_test_application/domain/entity/album/album_model.dart";
+import "package:my_app/domain/data_providers/api_cleint/api_repository.dart";
+import "package:my_app/domain/data_providers/local_storage/local_data_provider.dart";
+import "package:my_app/domain/entity/album/album_model.dart";
 
 class AlbumService {
   final ApiRepository _apiClient;
