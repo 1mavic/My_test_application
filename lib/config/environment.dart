@@ -5,6 +5,7 @@ late Environment env;
 Future<Environment> loadEnvironment() async {
   await dotenv.load();
   return Environment(
+    appNamePostfix: dotenv.env["appNamePostfix"] ?? "prod",
     apiUrl: dotenv.env["API"] ?? "",
   );
 }
@@ -12,7 +13,9 @@ Future<Environment> loadEnvironment() async {
 class Environment {
   Environment({
     required this.apiUrl,
+    required this.appNamePostfix,
   });
 
+  final String appNamePostfix;
   final String apiUrl;
 }

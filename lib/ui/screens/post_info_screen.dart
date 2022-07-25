@@ -1,17 +1,17 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/comment_bloc/comment_bloc.dart";
-import "package:flutter_test_application/domain/bloc/comment_bloc/comment_stat.dart";
-import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
-import "package:flutter_test_application/domain/entity/post/post_model.dart";
-import "package:flutter_test_application/localization/app_locale_keys.dart";
-import "package:flutter_test_application/localization/app_localization.dart";
-import "package:flutter_test_application/styles/app_colors.dart";
-import "package:flutter_test_application/ui/widgets/add_comment_bottom_sheet.dart";
-import "package:flutter_test_application/ui/widgets/card_widget.dart";
-import "package:flutter_test_application/ui/widgets/modal_bottom_sheet_template.dart";
-import "package:flutter_test_application/ui/widgets/scaffold_template_widget.dart";
-import "package:flutter_test_application/utils/string_extensions.dart";
+import "package:my_app/domain/bloc/comment_bloc/comment_bloc.dart";
+import "package:my_app/domain/bloc/comment_bloc/comment_stat.dart";
+import "package:my_app/domain/entity/comment/comment_model.dart";
+import "package:my_app/domain/entity/post/post_model.dart";
+import "package:my_app/localization/app_locale_keys.dart";
+import "package:my_app/localization/app_localization.dart";
+import "package:my_app/styles/app_colors.dart";
+import "package:my_app/ui/widgets/add_comment_bottom_sheet.dart";
+import "package:my_app/ui/widgets/card_widget.dart";
+import "package:my_app/ui/widgets/modal_bottom_sheet_template.dart";
+import "package:my_app/ui/widgets/scaffold_template_widget.dart";
+import "package:my_app/utils/string_extensions.dart";
 
 class PostInfoScrenn extends StatelessWidget {
   const PostInfoScrenn({Key? key, required this.post}) : super(key: key);

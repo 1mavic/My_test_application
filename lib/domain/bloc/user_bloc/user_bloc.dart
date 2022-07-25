@@ -1,7 +1,7 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/user_bloc/user_state.dart";
-import "package:flutter_test_application/domain/entity/user/user_model.dart";
-import "package:flutter_test_application/domain/services/user_service.dart";
+import "package:my_app/domain/bloc/user_bloc/user_state.dart";
+import "package:my_app/domain/entity/user/user_model.dart";
+import "package:my_app/domain/services/user_service.dart";
 
 abstract class UserEvent {}
 

@@ -2,7 +2,7 @@ import "dart:developer";
 import "dart:io";
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter_test_application/domain/entity/api_errors/api_error.dart";
+import "package:my_app/domain/entity/api_errors/api_error.dart";
 
 abstract class ApiClient {
   Future<dynamic> post(

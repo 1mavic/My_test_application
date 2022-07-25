@@ -1,11 +1,11 @@
 import "dart:async";
-import "package:flutter_test_application/domain/data_providers/api_cleint/dio_api_client.dart";
-import "package:flutter_test_application/domain/entity/album/album_model.dart";
-import "package:flutter_test_application/domain/entity/api_errors/api_error.dart";
-import "package:flutter_test_application/domain/entity/comment/comment_model.dart";
-import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
-import "package:flutter_test_application/domain/entity/post/post_model.dart";
-import "package:flutter_test_application/domain/entity/user/user_model.dart";
+import "package:my_app/domain/data_providers/api_cleint/dio_api_client.dart";
+import "package:my_app/domain/entity/album/album_model.dart";
+import "package:my_app/domain/entity/api_errors/api_error.dart";
+import "package:my_app/domain/entity/comment/comment_model.dart";
+import "package:my_app/domain/entity/photo/photo_model.dart";
+import "package:my_app/domain/entity/post/post_model.dart";
+import "package:my_app/domain/entity/user/user_model.dart";
 
 class ApiRepository {
   final ApiClient _apiClient;

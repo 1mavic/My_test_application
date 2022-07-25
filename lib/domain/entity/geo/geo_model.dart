@@ -29,7 +29,7 @@ class Geo {
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       "lat": lat,
       "lng": lng,
     };

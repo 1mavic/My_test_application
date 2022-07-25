@@ -1,7 +1,7 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/post_bloc/posts_state.dart";
-import "package:flutter_test_application/domain/entity/post/post_model.dart";
-import "package:flutter_test_application/domain/services/post_sevices.dart";
+import "package:my_app/domain/bloc/post_bloc/posts_state.dart";
+import "package:my_app/domain/entity/post/post_model.dart";
+import "package:my_app/domain/services/post_sevices.dart";
 
 abstract class PostsEvent {}
 

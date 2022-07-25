@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import "package:flutter_test_application/domain/entity/user/user_model.dart";
-import "package:flutter_test_application/navigation/routes.dart";
-import "package:flutter_test_application/ui/widgets/card_widget.dart";
+import "package:my_app/domain/entity/user/user_model.dart";
+import "package:my_app/navigation/routes.dart";
+import "package:my_app/ui/widgets/card_widget.dart";
 
 class UserCardWidget extends StatelessWidget {
   const UserCardWidget({Key? key, required this.user, required this.small})

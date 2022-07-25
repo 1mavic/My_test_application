@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:flutter_test_application/localization/app_locale_keys.dart";
+import "package:my_app/localization/app_locale_keys.dart";
 
 class AppLocalization {
   final Locale locale;

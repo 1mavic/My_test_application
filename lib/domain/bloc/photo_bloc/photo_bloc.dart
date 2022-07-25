@@ -1,7 +1,7 @@
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/photo_bloc/photo_state.dart";
-import "package:flutter_test_application/domain/entity/photo/photo_model.dart";
-import "package:flutter_test_application/domain/services/photo_service.dart";
+import "package:my_app/domain/bloc/photo_bloc/photo_state.dart";
+import "package:my_app/domain/entity/photo/photo_model.dart";
+import "package:my_app/domain/services/photo_service.dart";
 
 abstract class PhotoEvent {}
 

@@ -1,13 +1,13 @@
 import "package:dio/dio.dart";
-import "package:flutter_test_application/config/environment.dart";
-import "package:flutter_test_application/domain/data_providers/api_cleint/api_repository.dart";
-import "package:flutter_test_application/domain/data_providers/api_cleint/dio_api_client.dart";
-import "package:flutter_test_application/domain/data_providers/local_storage/local_data_provider.dart";
-import "package:flutter_test_application/domain/services/album_service.dart";
-import "package:flutter_test_application/domain/services/comment_service.dart";
-import "package:flutter_test_application/domain/services/photo_service.dart";
-import "package:flutter_test_application/domain/services/post_sevices.dart";
-import "package:flutter_test_application/domain/services/user_service.dart";
+import "package:my_app/config/environment.dart";
+import "package:my_app/domain/data_providers/api_cleint/api_repository.dart";
+import "package:my_app/domain/data_providers/api_cleint/dio_api_client.dart";
+import "package:my_app/domain/data_providers/local_storage/local_data_provider.dart";
+import "package:my_app/domain/services/album_service.dart";
+import "package:my_app/domain/services/comment_service.dart";
+import "package:my_app/domain/services/photo_service.dart";
+import "package:my_app/domain/services/post_sevices.dart";
+import "package:my_app/domain/services/user_service.dart";
 
 class DiContainer {
   DiContainer();

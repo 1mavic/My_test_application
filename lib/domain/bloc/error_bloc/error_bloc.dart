@@ -1,9 +1,9 @@
-import 'dart:async';
+import "dart:async";
 
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test_application/domain/bloc/error_bloc/error_bloc_state.dart";
-import "package:flutter_test_application/domain/data_providers/api_cleint/api_repository.dart";
-import "package:flutter_test_application/domain/entity/api_errors/api_error.dart";
+import "package:my_app/domain/bloc/error_bloc/error_bloc_state.dart";
+import "package:my_app/domain/data_providers/api_cleint/api_repository.dart";
+import "package:my_app/domain/entity/api_errors/api_error.dart";
 
 abstract class ErrorEvent {}
 
