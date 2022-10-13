@@ -1,6 +1,7 @@
 import "package:hive_flutter/hive_flutter.dart";
 
 abstract class LocalDataProvider {
+  Future<void> initDataProvider();
   void clearAll();
   String? checkUser();
   void saveUsers(String users);
@@ -10,6 +11,8 @@ abstract class LocalDataProvider {
   void saveAlbums(String albums, int userId);
   String? checkComments(int postId);
   void saveComments(String albums, int postId);
+  bool isThemeDark();
+  void saveTheme({required bool isDark});
 }
 
 class HiveDataProvider implements LocalDataProvider {
@@ -67,5 +70,30 @@ class HiveDataProvider implements LocalDataProvider {
   void saveComments(String albums, int postId) {
     final Box<String> userBox = Hive.box("comments");
     userBox.put("$postId", albums);
+  }
+
+  @override
+  bool isThemeDark() {
+    final bool? isDark = Hive.box<bool>("theme").get(
+      "key",
+      defaultValue: false,
+    );
+    return isDark ?? false;
+  }
+
+  @override
+  void saveTheme({required bool isDark}) {
+    final Box<bool> themeBox = Hive.box("theme");
+    themeBox.put("key", isDark);
+  }
+
+  @override
+  Future<void> initDataProvider() async {
+    await Hive.initFlutter();
+    await Hive.openBox<String>("users");
+    await Hive.openBox<String>("posts");
+    await Hive.openBox<String>("albums");
+    await Hive.openBox<String>("comments");
+    await Hive.openBox<bool>("theme");
   }
 }

@@ -17,6 +17,8 @@ class DiContainer {
   final ApiRepository _apiRepository = ApiRepository(_apiClient);
   final LocalDataProvider _localDataProvider = HiveDataProvider();
 
+  LocalDataProvider get dataProvider => _localDataProvider;
+
   ApiRepository makeApiRepository() => _apiRepository;
 
   UserService makeUserService() => UserService(

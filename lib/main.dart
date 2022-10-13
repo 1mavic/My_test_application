@@ -4,20 +4,18 @@ import "dart:async";
 import "dart:developer";
 
 import "package:flutter/material.dart";
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart"
     show
         GlobalCupertinoLocalizations,
         GlobalMaterialLocalizations,
         GlobalWidgetsLocalizations;
-import "package:hive_flutter/hive_flutter.dart";
 import "package:my_app/config/environment.dart";
 import "package:my_app/diContainer/di_container.dart";
+import "package:my_app/domain/bloc/settings_bloc/settings_bloc.dart";
+import "package:my_app/domain/data_providers/local_storage/local_data_provider.dart";
 import "package:my_app/localization/localization_delegate.dart";
 import "package:my_app/navigation/route_generatior.dart";
-import "package:my_app/styles/app_theme.dart";
-
-import 'domain/bloc/settings_bloc/settings_bloc.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -26,14 +24,16 @@ Future<void> main() async {
         FlutterError.presentError(details);
         log(details.toString());
       };
-      await Hive.initFlutter();
-      await Hive.openBox<String>("users");
-      await Hive.openBox<String>("posts");
-      await Hive.openBox<String>("albums");
-      await Hive.openBox<String>("comments");
-      env = await loadEnvironment();
 
-      runApp(MyApp());
+      env = await loadEnvironment();
+      final LocalDataProvider dataProvider = _diContainer.dataProvider;
+      await dataProvider.initDataProvider();
+
+      runApp(
+        MyApp(
+          isDark: dataProvider.isThemeDark(),
+        ),
+      );
     },
     (Object error, StackTrace stack) {
       log("${error.toString()} : ${stack.toString()}");
@@ -44,6 +44,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   MyApp({
     super.key,
+    required this.isDark,
   });
   final RouteGenerator _route = RouteGenerator(
     userService: _diContainer.makeUserService(),
@@ -53,11 +54,15 @@ class MyApp extends StatelessWidget {
     photoService: _diContainer.makePhotoService(),
     apiRepository: _diContainer.makeApiRepository(),
   );
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SettingsBloc>(
-      create: (BuildContext context) => SettingsBloc(),
+      create: (BuildContext context) => SettingsBloc(
+        isDark ? DarkSettingsState() : LightSettingsState(),
+        _diContainer.dataProvider,
+      ),
       child: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (BuildContext context, SettingsState state) {
           return runMaterial(
