@@ -24,6 +24,8 @@ class AppLocalization {
       AppLocKeys.attention: "attention",
       AppLocKeys.clearData: "do you want to clear local cache?",
       AppLocKeys.navigationError: "navigation error",
+      AppLocKeys.settings: "settings",
+      AppLocKeys.darkTheme: "dark theme",
     },
     "ru": <AppLocKeys, String>{
       AppLocKeys.userList: "список пользователей",
@@ -38,6 +40,8 @@ class AppLocalization {
       AppLocKeys.attention: "внимание",
       AppLocKeys.clearData: "Вы хотите очистить локальные данные?",
       AppLocKeys.navigationError: "Ошибка навигации",
+      AppLocKeys.settings: "настройки",
+      AppLocKeys.darkTheme: "темная тема",
     },
     "fi": <AppLocKeys, String>{
       AppLocKeys.userList: "luettelo käyttäjistä",
@@ -52,6 +56,8 @@ class AppLocalization {
       AppLocKeys.attention: "huomio",
       AppLocKeys.clearData: "haluatko tyhjentää paikallisen välimuistin?",
       AppLocKeys.navigationError: "navigointivirhe",
+      AppLocKeys.settings: "asetukset",
+      AppLocKeys.darkTheme: "tumma teema",
     },
   };
 }

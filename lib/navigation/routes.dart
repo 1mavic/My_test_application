@@ -5,4 +5,5 @@ abstract class AppRoutes {
   static const String userPostInfo = "/user/postAll/postInfo";
   static const String userAlbums = "/user/albums";
   static const String userAlbumInfo = "/user/albumInfo";
+  static const String settings = "/settings";
 }

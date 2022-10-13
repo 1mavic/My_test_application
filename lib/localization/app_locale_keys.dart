@@ -11,4 +11,6 @@ enum AppLocKeys {
   attention,
   clearData,
   navigationError,
+  settings,
+  darkTheme,
 }

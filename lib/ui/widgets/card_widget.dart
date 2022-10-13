@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:my_app/styles/app_colors.dart";
 
 class CardWidget extends StatelessWidget {
   const CardWidget({super.key, required this.child});
@@ -8,7 +7,7 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.containerColor,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(8),
       ),
       width: double.infinity,

@@ -21,6 +21,7 @@ import "package:my_app/ui/screens/album_info_screen.dart";
 import "package:my_app/ui/screens/albums_user_screen.dart";
 import "package:my_app/ui/screens/post_all_screen.dart";
 import "package:my_app/ui/screens/post_info_screen.dart";
+import 'package:my_app/ui/screens/settings_screen.dart';
 import "package:my_app/ui/screens/user_info_screen.dart";
 import "package:my_app/ui/screens/users_screen.dart";
 import "package:my_app/utils/string_extensions.dart";
@@ -123,6 +124,10 @@ class RouteGenerator {
           );
         }
         return _errorRoute();
+      case AppRoutes.settings:
+        return MaterialPageRoute<dynamic>(
+          builder: (BuildContext context) => SettingsScreen(),
+        );
       default:
         return _errorRoute();
     }

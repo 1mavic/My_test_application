@@ -20,11 +20,16 @@ class AlbumInfoScreen extends StatelessWidget {
     return ScaffoldBodyTemplateWidget(
       appBarTitle: context.localize(AppLocKeys.album).firstToUpper(),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           const SizedBox(
             height: 15,
           ),
-          Text("Album: ${album.title}"),
+          Center(
+            child: Text(
+              "Album: ${album.title}",
+            ),
+          ),
           const SizedBox(
             height: 20,
           ),
@@ -96,7 +101,7 @@ class _AlbumdPhotosWidget extends StatelessWidget {
               options: CarouselOptions(
                 //height: 201.94,
                 aspectRatio: 359 / 220,
-                viewportFraction: 0.93,
+                viewportFraction: 0.7,
               ),
             );
           default:

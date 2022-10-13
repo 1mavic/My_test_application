@@ -17,7 +17,7 @@ Future<T?> showMyCustomModalBottomSheet<T>({
       expand: fullHeight,
       builder: (BuildContext context) => Material(
         child: ColoredBox(
-          color: AppColors.white,
+          color: Theme.of(context).dialogBackgroundColor,
           child: Padding(
             padding: EdgeInsets.only(
               bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -46,13 +46,13 @@ Future<T?> showMyCustomModalBottomSheet<T>({
                 Container(
                   height: 38,
                   width: double.infinity,
-                  color: AppColors.white,
+                  color: Theme.of(context).dialogBackgroundColor,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Center(
                       child: Container(
-                        decoration: const BoxDecoration(
-                          color: AppColors.containerColor,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
                         ),
                         width: 140,
                       ),

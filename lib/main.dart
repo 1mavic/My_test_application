@@ -4,6 +4,7 @@ import "dart:async";
 import "dart:developer";
 
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:flutter_localizations/flutter_localizations.dart"
     show
         GlobalCupertinoLocalizations,
@@ -15,6 +16,8 @@ import "package:my_app/diContainer/di_container.dart";
 import "package:my_app/localization/localization_delegate.dart";
 import "package:my_app/navigation/route_generatior.dart";
 import "package:my_app/styles/app_theme.dart";
+
+import 'domain/bloc/settings_bloc/settings_bloc.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -53,9 +56,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<SettingsBloc>(
+      create: (BuildContext context) => SettingsBloc(),
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (BuildContext context, SettingsState state) {
+          return runMaterial(
+            state.theme,
+          );
+        },
+      ),
+    );
+  }
+
+  MaterialApp runMaterial(ThemeData theme) {
     return MaterialApp(
       scaffoldMessengerKey: scaffoldMessengerState,
-      theme: appTheme,
+      theme: theme,
       initialRoute: _route.initialRoute,
       onGenerateRoute: _route.onGenerateRoute,
       localizationsDelegates: <LocalizationsDelegate<dynamic>>[
