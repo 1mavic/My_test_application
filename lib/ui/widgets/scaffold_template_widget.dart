@@ -2,10 +2,10 @@ import "package:flutter/material.dart";
 
 class ScaffoldBodyTemplateWidget extends StatelessWidget {
   const ScaffoldBodyTemplateWidget({
-    Key? key,
+    super.key,
     required this.appBarTitle,
     required this.body,
-  }) : super(key: key);
+  });
   final String appBarTitle;
   final Widget body;
   @override

@@ -4,21 +4,21 @@ import "package:my_app/domain/bloc/comment_bloc/comment_bloc.dart";
 import "package:my_app/domain/bloc/comment_bloc/comment_stat.dart";
 import "package:my_app/domain/entity/comment/comment_model.dart";
 import "package:my_app/domain/entity/post/post_model.dart";
-import "package:my_app/localization/app_locale_keys.dart";
-import "package:my_app/localization/app_localization.dart";
+import "package:my_app/localization/localization.dart";
 import "package:my_app/styles/app_colors.dart";
 import "package:my_app/ui/widgets/add_comment_bottom_sheet.dart";
+import "package:my_app/ui/widgets/button.dart";
 import "package:my_app/ui/widgets/card_widget.dart";
 import "package:my_app/ui/widgets/modal_bottom_sheet_template.dart";
 import "package:my_app/ui/widgets/scaffold_template_widget.dart";
 import "package:my_app/utils/string_extensions.dart";
 
 class PostInfoScrenn extends StatelessWidget {
-  const PostInfoScrenn({Key? key, required this.post}) : super(key: key);
+  const PostInfoScrenn({super.key, required this.post});
   final Post post;
   @override
   Widget build(BuildContext context) {
-    final CommentBloc _model = context.watch<CommentBloc>();
+    final CommentBloc model = context.watch<CommentBloc>();
     return ScaffoldBodyTemplateWidget(
       appBarTitle: "Пост",
       body: Column(
@@ -35,18 +35,16 @@ class PostInfoScrenn extends StatelessWidget {
           ),
           const Flexible(flex: 5, child: _CommentsWidget()),
           Flexible(
-            child: ElevatedButton(
+            child: MyButton(
               onPressed: () {
                 showMyCustomModalBottomSheet(
                   fullHeight: false,
                   context: context,
                   builder: (BuildContext context) =>
-                      AddCommentWidget(commentBloc: _model),
+                      AddCommentWidget(commentBloc: model),
                 );
               },
-              child: Text(
-                context.localize(AppLocKeys.userList).firstToUpper(),
-              ),
+              text: context.localize(AppLocKeys.addComment),
             ),
           )
         ],
@@ -56,8 +54,7 @@ class PostInfoScrenn extends StatelessWidget {
 }
 
 class _DetailedPostWidget extends StatelessWidget {
-  const _DetailedPostWidget({Key? key, required this.title, required this.body})
-      : super(key: key);
+  const _DetailedPostWidget({required this.title, required this.body});
   final String title;
   final String body;
   @override
@@ -93,7 +90,7 @@ class _DetailedPostWidget extends StatelessWidget {
 }
 
 class _CommentsWidget extends StatelessWidget {
-  const _CommentsWidget({Key? key}) : super(key: key);
+  const _CommentsWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +99,14 @@ class _CommentsWidget extends StatelessWidget {
         builder: (BuildContext context, CommentScreenState state) {
           switch (state.runtimeType) {
             case CommentLoadingState:
-              final CommentLoadingState _state = state as CommentLoadingState;
+              final CommentLoadingState currentState =
+                  state as CommentLoadingState;
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _state.message,
+                      currentState.message,
                       style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(
@@ -119,23 +117,23 @@ class _CommentsWidget extends StatelessWidget {
                 ),
               );
             case CommentErrorState:
-              final CommentErrorState _state = state as CommentErrorState;
+              final CommentErrorState currentState = state as CommentErrorState;
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _state.error,
+                      currentState.error,
                       style: const TextStyle(color: Colors.black),
                     ),
                   ],
                 ),
               );
             case CommentListObtainedState:
-              final List<Comment> _comments =
+              final List<Comment> comments =
                   context.watch<CommentBloc>().comments;
               return _CommentsListWidget(
-                comments: _comments,
+                comments: comments,
               );
             default:
               return const SizedBox.shrink();
@@ -147,8 +145,7 @@ class _CommentsWidget extends StatelessWidget {
 }
 
 class _CommentsListWidget extends StatelessWidget {
-  const _CommentsListWidget({Key? key, required this.comments})
-      : super(key: key);
+  const _CommentsListWidget({required this.comments});
   final List<Comment> comments;
   @override
   Widget build(BuildContext context) {
@@ -177,11 +174,10 @@ class _CommentsListWidget extends StatelessWidget {
 
 class _CommentWidget extends StatelessWidget {
   const _CommentWidget({
-    Key? key,
     required this.name,
     required this.email,
     required this.comment,
-  }) : super(key: key);
+  });
   final String name;
   final String email;
   final String comment;

@@ -126,9 +126,9 @@ class ApiRepository {
         },
       );
       if (response != null) {
-        final Map<String, dynamic> _data = response as Map<String, dynamic>;
-        final int _id = _data["id"] as int;
-        return _id;
+        final Map<String, dynamic> data = response as Map<String, dynamic>;
+        final int id = data["id"] as int;
+        return id;
       }
       return null;
     } on ApiError catch (apiException) {

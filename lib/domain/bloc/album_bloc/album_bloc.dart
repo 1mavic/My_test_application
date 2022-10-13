@@ -21,13 +21,13 @@ class AlbumBloc extends Bloc<AlbumEvent, AlbumScreenState> {
     on<GetAlbumsEvent>(
         (GetAlbumsEvent event, Emitter<AlbumScreenState> emit) async {
       emit(AlbumLoadingState());
-      final List<Album> _albumList =
+      final List<Album> albumList =
           await _albumService.getUserAlbum(event.userId);
-      if (_albumList.isEmpty) {
+      if (albumList.isEmpty) {
         emit(AlbumErrorState(error: "Получен пустой список альбомов"));
         return;
       }
-      _albums = _albumList;
+      _albums = albumList;
       emit(AlbumListObtainedState());
       return;
     });

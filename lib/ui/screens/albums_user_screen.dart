@@ -6,7 +6,7 @@ import 'package:my_app/ui/widgets/preview_list_widget.dart';
 import "package:my_app/ui/widgets/scaffold_template_widget.dart";
 
 class UserAlbumsScreen extends StatelessWidget {
-  const UserAlbumsScreen({Key? key, required this.albums}) : super(key: key);
+  const UserAlbumsScreen({super.key, required this.albums});
   final List<Album> albums;
   @override
   Widget build(BuildContext context) {

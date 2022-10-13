@@ -1,27 +1,26 @@
 import "package:flutter/material.dart";
 import "package:my_app/domain/entity/album/album_model.dart";
 import "package:my_app/domain/entity/post/post_model.dart";
-import "package:my_app/localization/app_locale_keys.dart";
-import "package:my_app/localization/app_localization.dart";
+import "package:my_app/localization/localization.dart";
 import "package:my_app/styles/app_colors.dart";
 import "package:my_app/ui/widgets/card_widget.dart";
 import "package:my_app/utils/string_extensions.dart";
 
 class PreviewWidget<T> extends StatelessWidget {
   const PreviewWidget({
-    Key? key,
+    super.key,
     required this.items,
     required this.small,
     required this.routeToDetail,
     required this.routeToList,
-  }) : super(key: key);
+  });
   final List<T> items;
   final String routeToDetail;
   final String routeToList;
   final bool small;
   @override
   Widget build(BuildContext context) {
-    final int _length = small
+    final int length = small
         ? items.length > 3
             ? 3
             : items.length
@@ -29,7 +28,7 @@ class PreviewWidget<T> extends StatelessWidget {
     if (items.isEmpty) {
       return const SizedBox.shrink();
     }
-    final Widget _bodyList = CardWidget(
+    final Widget bodyList = CardWidget(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -37,7 +36,7 @@ class PreviewWidget<T> extends StatelessWidget {
             padding: EdgeInsets.zero,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: _length,
+            itemCount: length,
             separatorBuilder: (_, __) => Divider(
               height: small ? 15 : 20,
               color: AppColors.blue,
@@ -67,7 +66,7 @@ class PreviewWidget<T> extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  context.localize(AppLocKeys.userList).firstToUpper(),
+                  context.localize(AppLocKeys.seeAll).firstToUpper(),
                 ),
               ),
             )
@@ -76,38 +75,38 @@ class PreviewWidget<T> extends StatelessWidget {
     );
 
     return small
-        ? _bodyList
+        ? bodyList
         : SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            child: _bodyList,
+            child: bodyList,
           );
   }
 }
 
 class _ItemPreviewWidget<T> extends StatelessWidget {
-  const _ItemPreviewWidget({Key? key, required this.item}) : super(key: key);
+  const _ItemPreviewWidget({super.key, required this.item});
   final T item;
   @override
   Widget build(BuildContext context) {
-    String? _title;
-    String? _body;
+    String? title;
+    String? body;
     if (T == Post) {
       final Post post = item as Post;
-      _title = post.title;
-      _body = post.body.split("\n").first;
+      title = post.title;
+      body = post.body.split("\n").first;
     } else if (T == Album) {
       final Album album = item as Album;
-      _title = album.title;
-      _body = null;
+      title = album.title;
+      body = null;
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        if (_title != null) Text(_title),
-        if (_title != null && _body != null) const SizedBox(height: 5),
-        if (_body != null)
+        if (title != null) Text(title),
+        if (title != null && body != null) const SizedBox(height: 5),
+        if (body != null)
           Text(
-            _body,
+            body,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

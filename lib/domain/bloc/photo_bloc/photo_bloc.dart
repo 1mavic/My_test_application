@@ -21,13 +21,13 @@ class PhotoBloc extends Bloc<PhotoEvent, PhotoScreenState> {
     on<GetPhotosEvent>(
         (GetPhotosEvent event, Emitter<PhotoScreenState> emit) async {
       emit(PhotoLoadingState());
-      final List<Photo> _photoList =
+      final List<Photo> photoList =
           await _photoService.getAlbumPhotos(event.albumId);
-      if (_photoList.isEmpty) {
+      if (photoList.isEmpty) {
         emit(PhotoErrorState(error: "Нет фотографий"));
         return;
       }
-      _photos = _photoList;
+      _photos = photoList;
       emit(PhotoListObtainedState());
       return;
     });

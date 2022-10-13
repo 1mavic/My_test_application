@@ -15,8 +15,7 @@ import "package:my_app/domain/services/comment_service.dart";
 import "package:my_app/domain/services/photo_service.dart";
 import "package:my_app/domain/services/post_sevices.dart";
 import "package:my_app/domain/services/user_service.dart";
-import "package:my_app/localization/app_locale_keys.dart";
-import "package:my_app/localization/app_localization.dart";
+import "package:my_app/localization/localization.dart";
 import "package:my_app/navigation/routes.dart";
 import "package:my_app/ui/screens/album_info_screen.dart";
 import "package:my_app/ui/screens/albums_user_screen.dart";
@@ -137,7 +136,7 @@ class RouteGenerator {
 }
 
 class _NavigationErrorScreen extends StatelessWidget {
-  const _NavigationErrorScreen({Key? key}) : super(key: key);
+  const _NavigationErrorScreen();
 
   @override
   Widget build(BuildContext context) {

@@ -10,13 +10,13 @@ Future<T?> showMyCustomModalBottomSheet<T>({
   bool? reverse,
   String? header,
   String? subheader,
-  final double? padding,
+  double? padding,
 }) =>
     showCupertinoModalBottomSheet<T>(
       context: context,
       expand: fullHeight,
       builder: (BuildContext context) => Material(
-        child: Container(
+        child: ColoredBox(
           color: AppColors.white,
           child: Padding(
             padding: EdgeInsets.only(

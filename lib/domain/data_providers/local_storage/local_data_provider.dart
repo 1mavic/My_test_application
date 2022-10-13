@@ -29,8 +29,8 @@ class HiveDataProvider implements LocalDataProvider {
 
   @override
   void saveUsers(String users) {
-    final Box<String> _userBox = Hive.box("users");
-    _userBox.put("data", users);
+    final Box<String> userBox = Hive.box("users");
+    userBox.put("data", users);
   }
 
   @override
@@ -41,8 +41,8 @@ class HiveDataProvider implements LocalDataProvider {
 
   @override
   void savePosts(String users, int userId) {
-    final Box<String> _userBox = Hive.box("posts");
-    _userBox.put("$userId", users);
+    final Box<String> userBox = Hive.box("posts");
+    userBox.put("$userId", users);
   }
 
   @override
@@ -53,8 +53,8 @@ class HiveDataProvider implements LocalDataProvider {
 
   @override
   void saveAlbums(String albums, int userId) {
-    final Box<String> _userBox = Hive.box("albums");
-    _userBox.put("$userId", albums);
+    final Box<String> userBox = Hive.box("albums");
+    userBox.put("$userId", albums);
   }
 
   @override
@@ -65,7 +65,7 @@ class HiveDataProvider implements LocalDataProvider {
 
   @override
   void saveComments(String albums, int postId) {
-    final Box<String> _userBox = Hive.box("comments");
-    _userBox.put("$postId", albums);
+    final Box<String> userBox = Hive.box("comments");
+    userBox.put("$postId", albums);
   }
 }

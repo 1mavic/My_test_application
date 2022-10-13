@@ -9,7 +9,7 @@ import "package:my_app/config/environment.dart";
 class FlavorBanner extends StatelessWidget {
   final Widget child;
 
-  const FlavorBanner({Key? key, required this.child}) : super(key: key);
+  const FlavorBanner({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class FlavorBanner extends StatelessWidget {
 }
 
 class _BannerWidget extends StatelessWidget {
-  const _BannerWidget({Key? key}) : super(key: key);
+  const _BannerWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class BannerConfig {
 }
 
 class _DeviseInfoDialog extends StatelessWidget {
-  const _DeviseInfoDialog({Key? key}) : super(key: key);
+  const _DeviseInfoDialog();
 
   @override
   Widget build(BuildContext context) {
@@ -181,8 +181,7 @@ class _DeviseInfoDialog extends StatelessWidget {
 }
 
 class _TileWidget extends StatelessWidget {
-  const _TileWidget({Key? key, required this.name, required this.value})
-      : super(key: key);
+  const _TileWidget({required this.name, required this.value});
   final String name;
   final String value;
   @override

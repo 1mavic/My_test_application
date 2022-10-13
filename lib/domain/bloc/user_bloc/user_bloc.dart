@@ -15,8 +15,8 @@ class UserBloc extends Bloc<UserEvent, UserScreenState> {
   List<User> get users => _users;
 
   User? getUser(int id) {
-    final int _findedInsex = _users.indexWhere((User user) => user.id == id);
-    return _findedInsex != -1 ? _users[_findedInsex] : null;
+    final int findedInsex = _users.indexWhere((User user) => user.id == id);
+    return findedInsex != -1 ? _users[findedInsex] : null;
   }
 
   final UserService _userService;
@@ -24,25 +24,25 @@ class UserBloc extends Bloc<UserEvent, UserScreenState> {
     on<GetUsersEvent>(
         (GetUsersEvent event, Emitter<UserScreenState> emit) async {
       emit(UserLoadingState());
-      final List<User> _usersList = await _userService.getUsers();
-      if (_usersList.isEmpty) {
+      final List<User> usersList = await _userService.getUsers();
+      if (usersList.isEmpty) {
         emit(UserErrorState(error: "Получен пустой список пользователей"));
         return;
       }
-      _users = _usersList;
+      _users = usersList;
       emit(UserListObtainedState());
       return;
     });
     on<GetUsersAndClearCache>(
         (GetUsersAndClearCache event, Emitter<UserScreenState> emit) async {
       emit(UserLoadingState());
-      final List<User> _usersList =
+      final List<User> usersList =
           await _userService.getUsers(clearCache: true);
-      if (_usersList.isEmpty) {
+      if (usersList.isEmpty) {
         emit(UserErrorState(error: "Получен пустой список пользователей"));
         return;
       }
-      _users = _usersList;
+      _users = usersList;
       emit(UserListObtainedState());
       return;
     });

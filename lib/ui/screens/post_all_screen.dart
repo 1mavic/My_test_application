@@ -5,7 +5,7 @@ import "package:my_app/ui/widgets/preview_list_widget.dart";
 import "package:my_app/ui/widgets/scaffold_template_widget.dart";
 
 class AllPostsScreen extends StatelessWidget {
-  const AllPostsScreen({Key? key, required this.posts}) : super(key: key);
+  const AllPostsScreen({super.key, required this.posts});
   final List<Post> posts;
   @override
   Widget build(BuildContext context) {

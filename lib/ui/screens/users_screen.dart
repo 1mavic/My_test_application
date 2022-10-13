@@ -6,8 +6,7 @@ import "package:my_app/domain/bloc/error_bloc/error_bloc_state.dart";
 import "package:my_app/domain/bloc/user_bloc/user_bloc.dart";
 import "package:my_app/domain/bloc/user_bloc/user_state.dart";
 import "package:my_app/domain/entity/user/user_model.dart";
-import "package:my_app/localization/app_locale_keys.dart";
-import "package:my_app/localization/app_localization.dart";
+import "package:my_app/localization/localization.dart";
 import "package:my_app/main.dart";
 import "package:my_app/ui/widgets/scaffold_template_widget.dart";
 import "package:my_app/ui/widgets/user_card_widget.dart";
@@ -15,7 +14,7 @@ import "package:my_app/utils/cupertino_dialog.dart";
 import "package:my_app/utils/string_extensions.dart";
 
 class UsersScreen extends StatelessWidget {
-  const UsersScreen({Key? key}) : super(key: key);
+  const UsersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +37,14 @@ class UsersScreen extends StatelessWidget {
             builder: (BuildContext context, UserScreenState state) {
               switch (state.runtimeType) {
                 case UserLoadingState:
-                  final UserLoadingState _state = state as UserLoadingState;
+                  final UserLoadingState currentState =
+                      state as UserLoadingState;
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          _state.message,
+                          currentState.message,
                           style: const TextStyle(color: Colors.black),
                         ),
                         const SizedBox(
@@ -55,13 +55,13 @@ class UsersScreen extends StatelessWidget {
                     ),
                   );
                 case UserErrorState:
-                  final UserErrorState _state = state as UserErrorState;
+                  final UserErrorState currentState = state as UserErrorState;
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          _state.error,
+                          currentState.error,
                           style: const TextStyle(color: Colors.black),
                         ),
                       ],
@@ -81,9 +81,7 @@ class UsersScreen extends StatelessWidget {
 }
 
 class _UserListWidget extends StatefulWidget {
-  const _UserListWidget({
-    Key? key,
-  }) : super(key: key);
+  const _UserListWidget();
 
   @override
   State<_UserListWidget> createState() => _UserListWidgetState();
@@ -92,7 +90,7 @@ class _UserListWidget extends StatefulWidget {
 class _UserListWidgetState extends State<_UserListWidget> {
   @override
   Widget build(BuildContext context) {
-    final List<User> _users = context.watch<UserBloc>().users;
+    final List<User> users = context.watch<UserBloc>().users;
     return RefreshIndicator(
       onRefresh: () async {
         final bool? result = await showIosDialog<bool>(context);
@@ -106,13 +104,13 @@ class _UserListWidgetState extends State<_UserListWidget> {
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 15),
         itemBuilder: (BuildContext context, int index) => UserCardWidget(
-          user: _users[index],
+          user: users[index],
           small: true,
         ),
         separatorBuilder: (_, __) => const SizedBox(
           height: 10,
         ),
-        itemCount: _users.length,
+        itemCount: users.length,
       ),
     );
   }

@@ -5,8 +5,7 @@ import "package:my_app/domain/bloc/photo_bloc/photo_bloc.dart";
 import "package:my_app/domain/bloc/photo_bloc/photo_state.dart";
 import "package:my_app/domain/entity/album/album_model.dart";
 import "package:my_app/domain/entity/photo/photo_model.dart";
-import "package:my_app/localization/app_locale_keys.dart";
-import "package:my_app/localization/app_localization.dart";
+import "package:my_app/localization/localization.dart";
 import "package:my_app/styles/app_colors.dart";
 import "package:my_app/ui/widgets/card_widget.dart";
 import "package:my_app/ui/widgets/image_widget.dart";
@@ -14,14 +13,17 @@ import "package:my_app/ui/widgets/scaffold_template_widget.dart";
 import "package:my_app/utils/string_extensions.dart";
 
 class AlbumInfoScreen extends StatelessWidget {
-  const AlbumInfoScreen({Key? key, required this.album}) : super(key: key);
+  const AlbumInfoScreen({super.key, required this.album});
   final Album album;
   @override
   Widget build(BuildContext context) {
     return ScaffoldBodyTemplateWidget(
-      appBarTitle: context.localize(AppLocKeys.userList).firstToUpper(),
+      appBarTitle: context.localize(AppLocKeys.album).firstToUpper(),
       body: Column(
         children: <Widget>[
+          const SizedBox(
+            height: 15,
+          ),
           Text("Album: ${album.title}"),
           const SizedBox(
             height: 20,
@@ -34,7 +36,7 @@ class AlbumInfoScreen extends StatelessWidget {
 }
 
 class _AlbumdPhotosWidget extends StatelessWidget {
-  const _AlbumdPhotosWidget({Key? key}) : super(key: key);
+  const _AlbumdPhotosWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +49,14 @@ class _AlbumdPhotosWidget extends StatelessWidget {
               child: CircularProgressIndicator.adaptive(),
             );
           case PhotoErrorState:
-            final PhotoErrorState _state = state as PhotoErrorState;
+            final PhotoErrorState currentState = state as PhotoErrorState;
             return CardWidget(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _state.error,
+                      currentState.error,
                       style: const TextStyle(color: Colors.black),
                     ),
                   ],
@@ -62,11 +64,11 @@ class _AlbumdPhotosWidget extends StatelessWidget {
               ),
             );
           case PhotoListObtainedState:
-            final List<Photo> _photos = context.watch<PhotoBloc>().photos;
-            if (_photos.isEmpty) {
+            final List<Photo> photos = context.watch<PhotoBloc>().photos;
+            if (photos.isEmpty) {
               return const SizedBox.shrink();
             }
-            final List<Widget> _photosForSlider = _photos
+            final List<Widget> photosForSlider = photos
                 .map(
                   (Photo photo) => Stack(
                     children: <Widget>[
@@ -90,7 +92,7 @@ class _AlbumdPhotosWidget extends StatelessWidget {
                 )
                 .toList();
             return CarouselSlider(
-              items: _photosForSlider,
+              items: photosForSlider,
               options: CarouselOptions(
                 //height: 201.94,
                 aspectRatio: 359 / 220,

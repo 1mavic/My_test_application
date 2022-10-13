@@ -21,12 +21,12 @@ class PostBloc extends Bloc<PostsEvent, PostScreenState> {
     on<GetPostsEvent>(
         (GetPostsEvent event, Emitter<PostScreenState> emit) async {
       emit(PostLoadingState());
-      final List<Post> _postsList = await _postservice.getPostbyId(event.id);
-      if (_postsList.isEmpty) {
+      final List<Post> postsList = await _postservice.getPostbyId(event.id);
+      if (postsList.isEmpty) {
         emit(PostErrorState(error: "Получен пустой список пользователей"));
         return;
       }
-      _posts = _postsList;
+      _posts = postsList;
       emit(PostListObtainedState());
       return;
     });

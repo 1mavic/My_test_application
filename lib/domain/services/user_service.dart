@@ -15,8 +15,8 @@ class UserService {
 
   List<User> makeUsers(String newUsers) {
     try {
-      final dynamic _users = jsonDecode(newUsers);
-      final List<User> users = (_users as List<dynamic>)
+      final dynamic userJson = jsonDecode(newUsers);
+      final List<User> users = (userJson as List<dynamic>)
           .map((dynamic user) => User.fromJson(user as Map<String, dynamic>))
           .toList();
       return users;

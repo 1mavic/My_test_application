@@ -29,9 +29,9 @@ class CommentBloc extends Bloc<CommentEvent, CommentScreenState> {
     on<GetCommentsEvent>(
         (GetCommentsEvent event, Emitter<CommentScreenState> emit) async {
       emit(CommentLoadingState());
-      final List<Comment> _commentList =
+      final List<Comment> commentList =
           await _commentService.getPostbyId(event.id);
-      _comments = _commentList;
+      _comments = commentList;
       emit(CommentListObtainedState());
       return;
     });

@@ -1,16 +1,17 @@
 import "package:flutter/material.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 import "package:my_app/domain/bloc/comment_bloc/comment_bloc.dart";
-import "package:my_app/styles/app_colors.dart";
+import "package:my_app/localization/localization.dart";
+import "package:my_app/ui/widgets/button.dart";
 import "package:my_app/utils/form_validator.dart";
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class AddCommentWidget extends HookWidget {
   const AddCommentWidget({
-    Key? key,
+    super.key,
     required this.commentBloc,
-  }) : super(key: key);
+  });
   final CommentBloc commentBloc;
   bool _sendForm(String name, String email, String comment) {
     if (_formKey.currentState?.validate() ?? false) {
@@ -28,16 +29,15 @@ class AddCommentWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _nameContorller = useTextEditingController();
-    final TextEditingController _emailContorller = useTextEditingController();
-    final TextEditingController _commentContorller = useTextEditingController();
+    final TextEditingController nameContorller = useTextEditingController();
+    final TextEditingController emailContorller = useTextEditingController();
+    final TextEditingController commentContorller = useTextEditingController();
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-            controller: _nameContorller,
+            controller: nameContorller,
             textInputAction: TextInputAction.next,
             textCapitalization: TextCapitalization.words,
             decoration: const InputDecoration(
@@ -49,7 +49,7 @@ class AddCommentWidget extends HookWidget {
             height: 10,
           ),
           TextFormField(
-            controller: _emailContorller,
+            controller: emailContorller,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
@@ -61,14 +61,14 @@ class AddCommentWidget extends HookWidget {
             height: 10,
           ),
           TextFormField(
-            controller: _commentContorller,
+            controller: commentContorller,
             maxLines: 5,
             textInputAction: TextInputAction.done,
             onFieldSubmitted: (_) {
               if (_sendForm(
-                _nameContorller.text,
-                _emailContorller.text,
-                _commentContorller.text,
+                nameContorller.text,
+                emailContorller.text,
+                commentContorller.text,
               )) {
                 Navigator.of(context).pop();
               }
@@ -81,30 +81,17 @@ class AddCommentWidget extends HookWidget {
           const SizedBox(
             height: 30,
           ),
-          GestureDetector(
-            onTap: () {
+          MyButton(
+            onPressed: () {
               if (_sendForm(
-                _nameContorller.text,
-                _emailContorller.text,
-                _commentContorller.text,
+                nameContorller.text,
+                emailContorller.text,
+                commentContorller.text,
               )) {
                 Navigator.of(context).pop();
               }
             },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: AppColors.blue,
-              ),
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 18),
-              child: const Center(
-                child: Text(
-                  "Отправить",
-                  style: TextStyle(color: AppColors.white),
-                ),
-              ),
-            ),
+            text: context.localize(AppLocKeys.addComment),
           )
         ],
       ),

@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "package:my_app/styles/app_colors.dart";
 
 class ImageWidget extends StatelessWidget {
-  const ImageWidget({Key? key, required this.url}) : super(key: key);
+  const ImageWidget({super.key, required this.url});
   final String url;
   @override
   Widget build(BuildContext context) {

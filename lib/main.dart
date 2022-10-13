@@ -40,8 +40,8 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   MyApp({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final RouteGenerator _route = RouteGenerator(
     userService: _diContainer.makeUserService(),
     postService: _diContainer.makePostService(),

@@ -14,7 +14,7 @@ import "package:my_app/ui/widgets/scaffold_template_widget.dart";
 import "package:my_app/ui/widgets/user_card_widget.dart";
 
 class UserInfoScreen extends StatelessWidget {
-  const UserInfoScreen({Key? key, required this.user}) : super(key: key);
+  const UserInfoScreen({super.key, required this.user});
   final User user;
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class UserInfoScreen extends StatelessWidget {
 }
 
 class _PostList extends StatelessWidget {
-  const _PostList({Key? key}) : super(key: key);
+  const _PostList();
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +48,14 @@ class _PostList extends StatelessWidget {
       builder: (BuildContext context, PostScreenState state) {
         switch (state.runtimeType) {
           case PostLoadingState:
-            final PostLoadingState _state = state as PostLoadingState;
+            final PostLoadingState currentState = state as PostLoadingState;
             return CardWidget(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _state.message,
+                      currentState.message,
                       style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(
@@ -67,14 +67,14 @@ class _PostList extends StatelessWidget {
               ),
             );
           case PostErrorState:
-            final PostErrorState _state = state as PostErrorState;
+            final PostErrorState currentState = state as PostErrorState;
             return CardWidget(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _state.error,
+                      currentState.error,
                       style: const TextStyle(color: Colors.black),
                     ),
                   ],
@@ -82,9 +82,9 @@ class _PostList extends StatelessWidget {
               ),
             );
           case PostListObtainedState:
-            final List<Post> _posts = context.watch<PostBloc>().posts;
+            final List<Post> posts = context.watch<PostBloc>().posts;
             return PreviewWidget<Post>(
-              items: _posts,
+              items: posts,
               routeToList: AppRoutes.userPostsAll,
               routeToDetail: AppRoutes.userPostInfo,
               small: true,
@@ -98,7 +98,7 @@ class _PostList extends StatelessWidget {
 }
 
 class _AlbumList extends StatelessWidget {
-  const _AlbumList({Key? key}) : super(key: key);
+  const _AlbumList();
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +106,14 @@ class _AlbumList extends StatelessWidget {
       builder: (BuildContext context, AlbumScreenState state) {
         switch (state.runtimeType) {
           case AlbumLoadingState:
-            final AlbumLoadingState _state = state as AlbumLoadingState;
+            final AlbumLoadingState currentState = state as AlbumLoadingState;
             return CardWidget(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _state.message,
+                      currentState.message,
                       style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(
@@ -125,14 +125,14 @@ class _AlbumList extends StatelessWidget {
               ),
             );
           case AlbumErrorState:
-            final AlbumErrorState _state = state as AlbumErrorState;
+            final AlbumErrorState currentState = state as AlbumErrorState;
             return CardWidget(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _state.error,
+                      currentState.error,
                       style: const TextStyle(color: Colors.black),
                     ),
                   ],
@@ -140,9 +140,9 @@ class _AlbumList extends StatelessWidget {
               ),
             );
           case AlbumListObtainedState:
-            final List<Album> _albums = context.watch<AlbumBloc>().albums;
+            final List<Album> albums = context.watch<AlbumBloc>().albums;
             return PreviewWidget<Album>(
-              items: _albums,
+              items: albums,
               routeToList: AppRoutes.userAlbums,
               routeToDetail: AppRoutes.userAlbumInfo,
               small: true,

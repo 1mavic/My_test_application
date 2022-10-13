@@ -4,13 +4,12 @@ import "package:my_app/navigation/routes.dart";
 import "package:my_app/ui/widgets/card_widget.dart";
 
 class UserCardWidget extends StatelessWidget {
-  const UserCardWidget({Key? key, required this.user, required this.small})
-      : super(key: key);
+  const UserCardWidget({super.key, required this.user, required this.small});
   final User user;
   final bool small;
   @override
   Widget build(BuildContext context) {
-    final Widget _body = Column(
+    final Widget body = Column(
       children: <Widget>[
         CardWidget(
           child: small
@@ -33,19 +32,18 @@ class UserCardWidget extends StatelessWidget {
     );
 
     return small
-        ? _body
+        ? body
         : SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            child: _body,
+            child: body,
           );
   }
 }
 
 class _SmallWidget extends StatelessWidget {
   const _SmallWidget({
-    Key? key,
     required this.user,
-  }) : super(key: key);
+  });
 
   final User user;
 
@@ -63,7 +61,7 @@ class _SmallWidget extends StatelessWidget {
 }
 
 class _BigWidget extends StatelessWidget {
-  const _BigWidget({Key? key, required this.user}) : super(key: key);
+  const _BigWidget({required this.user});
   final User user;
   @override
   Widget build(BuildContext context) {

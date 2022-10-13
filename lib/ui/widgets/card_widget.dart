@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:my_app/styles/app_colors.dart";
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({Key? key, required this.child}) : super(key: key);
+  const CardWidget({super.key, required this.child});
   final Widget child;
   @override
   Widget build(BuildContext context) {
